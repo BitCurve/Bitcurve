@@ -1,0 +1,40 @@
+var app = angular.module('bitcurve', ['ui.router']);
+
+app.config(function($stateProvider, $urlRouterProvider){
+	$urlRouterProvider
+  .otherwise("/");
+
+// ROUTERS
+  $stateProvider
+  // HOMEPAGE
+  .state('home', {
+    url: '/',
+    templateUrl: "../templates/homeTmpl.html",
+    controller: "homeCtrl"
+  })
+  // ABOUT BITCURVE
+  .state('about', {
+    url: "/about",
+    templateUrl: "../templates/aboutTmpl.html",
+    controller: "aboutCtrl"
+  })
+  // WHAT IS BITCOIN PAGE
+  .state('whatIsBitcoin', {
+    url: "/whatIsBitcoin",
+    templateUrl: "../templates/whatIsBitcoinTmpl.html",
+    controller: "whatIsBitcoinCtrl"
+  })
+  // USER ART
+  .state('userArt', {
+    url: "/userArt",
+    templateUrl: "../templates/userArtTmpl.html",
+    controller: "userArtCtrl"
+  })
+  // LOGIN
+  // .state('login', {
+  //   url: "/login",
+  //   templateUrl: "../templates/loginTmpl.html",
+  //   controller: "loginCtrl"
+  // })
+
+}); // End app.config
