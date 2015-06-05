@@ -9,25 +9,25 @@ app.config(function($stateProvider, $urlRouterProvider){
   // HOMEPAGE
   .state('home', {
     url: '/',
-    templateUrl: "../templates/homeTmpl.html",
+    templateUrl: "./templates/homeTmpl.html",
     controller: "homeCtrl"
   })
   // ABOUT BITCURVE
   .state('about', {
     url: "/about",
-    templateUrl: "../templates/aboutTmpl.html",
+    templateUrl: "./templates/aboutTmpl.html",
     controller: "aboutCtrl"
   })
-  // WHAT IS BITCOIN PAGE
+  // WHAT IS BITCOIN
   .state('whatIsBitcoin', {
     url: "/whatIsBitcoin",
-    templateUrl: "../templates/whatIsBitcoinTmpl.html",
+    templateUrl: "./templates/whatIsBitcoinTmpl.html",
     controller: "whatIsBitcoinCtrl"
   })
   // USER ART
   .state('userArt', {
     url: "/userArt",
-    templateUrl: "../templates/userArtTmpl.html",
+    templateUrl: "./templates/userArtTmpl.html",
     controller: "userArtCtrl"
   })
   // LOGIN

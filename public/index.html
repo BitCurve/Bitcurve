@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="bitcurve">
 <head>
 	<title>Bitcurve</title>
 	<!-- STYLES -->
 	<link rel="stylesheet" href="./styles/style.css" />
 </head>
-<body>
+<body ng-controller="homeCtrl">{{test}}
+
+<!-- ROUTE VIEWS -->
+<!-- <div ui-view></div> -->
 	<!-- SCRIPTS -->
+	<script type="text/javascript" src="./js/angular.js"></script>
+	<script type="text/javascript" src="./js/ui-router.js"></script>
+	<script type="text/javascript" src="./js/app.js"></script>
 	<script type="text/javascript" src="./js/controllers/aboutCtrl.js"></script>
 	<script type="text/javascript" src="./js/controllers/homeCtrl.js"></script>
 	<script type="text/javascript" src="./js/controllers/userArtCtrl.js"></script>
