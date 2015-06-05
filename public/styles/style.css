@@ -1,0 +1,24 @@
+/* USUAL */
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+}
+
+/* MINOR UNIVERSAL CHANGES */
+body {
+	background-color: #FFFFFF;
+}
+
+/* NAVBAR */
+.navbar {
+	width: 100%;
+	height: 80px;
+	background-color: #3D8DBF;
+	display: inline-block;
+}
+
+.miniLogo {
+	width: 300px;
+	height: 80px;
+}
