@@ -11,7 +11,7 @@ this.getBitcoinPricing = function(){
 	// $http.get('https://www.quandl.com/api/v1/datasets/WIKI/AAPL.csv?auth_token=AmnikopZ2G-QXfdX3woi') stock market api
  
 	.success(function(data){
-		console.log(data)
+		// console.log(data)
 	
 
 		var lines=data.split("\n");
@@ -38,16 +38,11 @@ this.getBitcoinPricing = function(){
 				// Close: result[i].Close,
 				Average: result[i].average,
 				Volume: result[i].volume
-
-
 			})
-
 		}
-		// console.log(result)
 		result = bitCoinData;
-		deferred.resolve(bitCoinData)
-
-
+		// console.log("result", result)
+		deferred.resolve(bitCoinData);
 
 	})
 	return deferred.promise;	

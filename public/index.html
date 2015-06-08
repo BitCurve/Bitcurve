@@ -2,11 +2,21 @@
 <html ng-app="bitcurve">
 <head>
 	<title>Bitcurve</title>
-	<!-- STYLES -->
-	<link rel="stylesheet" href="./styles/style.css" />
+	<link rel="stylesheet" type="text/css" href="./styles/bootstrap.min.css"> <!-- For dashboard page -->
+    <link rel="stylesheet" type="text/css" href="./styles/dc.css"/> <!-- For dashboard page -->
+	<link rel="stylesheet" type="text/css" href="./styles/style.css" />
+	<style> /* For dashboard page */ 
+        #monthly-volume-chart g.y {
+            display: none;
+        }
+        #logo {
+            margin-right: 2em;
+            margin-top: 2em;
+        }
+    </style>
 </head>
 
-<body ng-controller="dashBoardCtrl">
+<body>
 
 <!-- NAVBAR -->
 <div class="navbar">
@@ -25,11 +35,17 @@
 	<script type="text/javascript" src="./js/angular.js"></script>
 	<script type="text/javascript" src="./js/ui-router.js"></script>
 	<script type="text/javascript" src="./js/app.js"></script>
+	<script type="text/javascript" src="./js/d3.js"></script>
+	<script type="text/javascript" src="./js/crossfilter.js"></script>
+	<script type="text/javascript" src="./js/dc.js"></script>
+	<script type="text/javascript" src="./js/colorbrewer.js"></script>
+	<!-- <script type="text/javascript" src="./js/dashboard.js"></script> -->
+
+	<script type="text/javascript" src="./js/controllers/dashBoardCtrl.js"></script>
+	<script type="text/javascript" src="./js/services/dashBoardService.js"></script>
 	<script type="text/javascript" src="./js/controllers/aboutCtrl.js"></script>
 	<script type="text/javascript" src="./js/controllers/homeCtrl.js"></script>
 	<script type="text/javascript" src="./js/controllers/userArtCtrl.js"></script>
 	<script type="text/javascript" src="./js/controllers/whatIsBitcoinCtrl.js"></script>
-	<script type="text/javascript" src="./js/controllers/dashBoardCtrl.js"></script>
-	<script type="text/javascript" src="./js/services/dashBoardService.js"></script>
 </body>
 </html>
