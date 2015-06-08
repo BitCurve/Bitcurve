@@ -17,7 +17,7 @@ request('https://api.coindesk.com/v1/bpi/currentprice.json', function (error, re
   	if (!error && response.statusCode == 200) {
     	console.log(body)
   	}
-});
+}); //requests data from the coindesk api, data shows up in terminal when you run node server
 
 // Connections
 var port = 8081
