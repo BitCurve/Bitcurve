@@ -30,6 +30,11 @@ app.config(function($stateProvider, $urlRouterProvider){
     templateUrl: "./templates/userArtTmpl.html",
     controller: "userArtCtrl"
   })
+  .state('dashboard', {
+    url: "/dashboard",
+    templateUrl: "./templates/dashboard.html",
+    controller: "dashBoardCtrl"
+  })
   // LOGIN
   // .state('login', {
   //   url: "/login",
