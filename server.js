@@ -14,6 +14,7 @@ var ExchangeRate = require('./models/ExchangeRate');
 var app = express();
 
 // Middleware
+app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(cors()); 
 
