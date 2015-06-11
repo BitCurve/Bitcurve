@@ -15,6 +15,18 @@ a {
 	color: inherit;
 }
 
+div {
+	margin-bottom: 0 !important;
+}
+
+a:link, a:visited, a:active {
+	color: inherit;
+}
+
+p {
+	margin: 0;
+}
+
 /* FONTS */
 @font-face {
 	font-family: 'Circular Reg';
@@ -47,7 +59,7 @@ a {
 	font-size: 20px;
 	float: right;
 	margin-top: 5px;
-	margin-right: 100px;
+	margin-right: 105px;
 	font-variant: small-caps;
 }
 
@@ -67,9 +79,83 @@ a {
 	background-color: #4795D1;
 }
 
+
 /* GENERAL ROUTES */
 .routeContainer {
 	width: 100%;
 	height: 100%;
+	font-family: 'Circular Bold';
+}
+
+.ng-scope {
+	width: 100%;
+	height: 100%;
+}
+
+/* HOME */
+.logoContainer {
 	background-color: #4795D1;
+	width: 100%;
+}
+
+.fatLogo {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 85%;
+	padding: 30px;
+}
+
+.welcome {
+	color: #FFF;
+	font-size: 5vw;
+	float: right;
+	position: relative;
+	top: 25vw;
+	right: 10vw;
+}
+
+.btnLink {
+	display: inline-block;
+	border-radius: 7px;
+}
+
+.btnText {
+	font-size: 20px;
+	padding: 30px;
+	color: #FFF;
+}
+
+.btnLink-design {
+	background-color: #f3a734;
+	left: 37vw;
+}
+
+/*.btnText-design {
+	
+}*/
+
+.btnLink-github {
+	background-color: #323131;
+	right: 20vw;
+}
+
+/*.btnText-github {
+
+}*/
+
+.btnContainer {
+	display: inline-block;
+	float: right;
+	text-align: center;
+	position: relative;
+	bottom: 120px;
+	right: 40px;
+}
+
+.gitLogoLight {
+	height: 40px;
+	position: relative;
+	left: 70px;
+	bottom: 5px;
 }
