@@ -19,7 +19,7 @@ var app = express();
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(cors());
-var file = './tmp/Bitcoin.json';
+var file = './tmp/bitcurve.json';
 
 // Endpoints
 // Gives current exchange rate data
