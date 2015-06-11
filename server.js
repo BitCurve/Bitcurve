@@ -19,7 +19,7 @@ var app = express();
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(cors());
-var file = './tmp/bitcurve.json';
+var file = './tmp/Bitcurve.json';
 
 // Endpoints
 // Gives current exchange rate data
@@ -34,7 +34,6 @@ var job = new CronJob ('00 */01 * * * *', function(){
     		})
     		newExchangeRate.save(function(err, res){
     			if (err) return handleError(err);
-    			console.log('rate', res);
     		})
   		}
 	});
@@ -62,6 +61,7 @@ job.start(); //sends data from the coindesk api every minute
 // }, true);
 // blockjob.start(); //will add data to json file once a day
 
+//Get request for the current exchange rate
 app.get ('/api/getData', function(req, res){
 	ExchangeRate.find(function(err, result){
 		if(err) return res.status(500).send(err);
@@ -69,9 +69,9 @@ app.get ('/api/getData', function(req, res){
 	});
 });
 
+//Get request for historical data from .json file
 app.get ('/api/bitcoinJson', function(req, res){
 	fs.readFile(file, 'utf8', function (err, data){
-		console.log(data);
 		res.send(data);
 	});
 });
