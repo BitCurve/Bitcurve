@@ -82,7 +82,7 @@ p {
 	display: block;
 	position: absolute;
 	right: 20vw;
-	top: 30px;
+	top: 22px;
 	font-size: 20px;
 	font-variant: small-caps;
 }
@@ -91,6 +91,7 @@ p {
 	display: inline-block;
 	margin-right: 5vw;
 	opacity: 0.5;
+	padding: 10px;
 }
 
 .inline:hover {
