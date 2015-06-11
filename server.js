@@ -5,10 +5,12 @@ var cors = require('cors');
 var mongoose = require('mongoose');
 var request = require('request');
 var CronJob = require('cron').CronJob;
-
+var fs = require('fs');
+var q = require('q');
 
 //Schema
 var ExchangeRate = require('./models/ExchangeRate');
+var BlockChainData = require('./models/BlockChainData');
 
 // Express
 var app = express();
@@ -16,9 +18,11 @@ var app = express();
 // Middleware
 app.use(express.static('public'));
 app.use(bodyParser.json());
-app.use(cors()); 
+app.use(cors());
+var file = './tmp/Bitcoin.json';
 
 // Endpoints
+// Gives current exchange rate data
 var job = new CronJob ('00 */01 * * * *', function(){
 	request('https://api.coindesk.com/v1/bpi/currentprice.json', function (error, response, body) {
   		if (!error && response.statusCode == 200) {
@@ -35,22 +39,44 @@ var job = new CronJob ('00 */01 * * * *', function(){
   		}
 	});
 }, true);
-job.start(); //sends data from the api every minute
+job.start(); //sends data from the coindesk api every minute
 
-request('https://api.bitcoinaverage.com/history/USD/per_day_all_time_history.csv', function(error, response, body) {
-	if (!error && response.statusCode == 200) {
-    	// console.log(body);
-  	}
-});	
+// var blockjob = new CronJob ('00 00 09 * * *', function(){
+// 	request ('', function(error, response, body){
+// 		if(!error && response.statusCode == 200) {
+// 			var blockParse = JSON.parse(body);
+// 			var newBlockChain = new BlockChainData({
+// 				Month: ,
+// 				Day: ,
+// 				Year: ,
+// 				Price: ,
+// 				totalCirculation: ,
+// 				totalTransactionFees: ,
+// 				numberOfUniqueBitcoinAddressesUsed: ,
+// 				totalOutputVolumeValue: ,
+// 				averageNumberOfTransactionsPerBlock: 
+// 			})
+// 			newBlockChain.push(file)
+// 		}
+// 	});
+// }, true);
+// blockjob.start(); //will add data to json file once a day
 
-request('https://blockchain.info/charts/$chart-type?format=json', function(error, response, body) {
-	if (!error && response.statusCode == 200) {
-		// console.log(body);
-		// var blockchainParse = JSON.parse(body);
-	}
-})
+app.get ('/api/getData', function(req, res){
+	ExchangeRate.find(function(err, result){
+		if(err) return res.status(500).send(err);
+		res.send(result);
+	});
+});
 
-app.get 
+app.get ('/api/bitcoinJson', function(req, res){
+	fs.readFile(file, 'utf8', function (err, data){
+		console.log(data);
+		res.send(data);
+	});
+});
+
+
 
 // Connections
 var port = 8081
