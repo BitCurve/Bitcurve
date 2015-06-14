@@ -1,7 +1,7 @@
 var app = angular.module('bitcurve');
 
 
-app.service('dashBoardService', function($http, $q){
+app.service('analyticsDashboardService', function($http, $q){
  var bitCoinData = [];
 
 	var deferred = $q.defer();
@@ -38,18 +38,18 @@ this.getBitcoinPricing = function(){
 				// Close: result[i].Close,
 				Average: result[i].average,
 				Volume: result[i].volume
-			})
+			});
 		}
 		result = bitCoinData;
 		// console.log("result", result)
 		deferred.resolve(bitCoinData);
 
-	})
+	});
 	return deferred.promise;	
-}
+};
 
 
-})
+});
 
 	    
 	    	
