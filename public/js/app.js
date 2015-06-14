@@ -35,6 +35,17 @@ app.config(function($stateProvider, $urlRouterProvider){
     templateUrl: "./templates/dashboard.html",
     controller: "dashBoardCtrl"
   })
+  .state('dashboard2', {
+    url: "/dashboard2",
+    templateUrl: "./dashboard2.html",
+    controller: "dashBoardCtrl"
+  })
+  .state('whitney', {
+    url: "/whitney",
+    templateUrl: "./templates/whitney.html",
+    controller: "whitneyCtrl"
+  })
+
   // LOGIN
   // .state('login', {
   //   url: "/login",
