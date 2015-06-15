@@ -27,11 +27,11 @@ var job = new CronJob ('00 */01 * * * *', function(){
     			exchangeRate: exchangeParse.bpi.USD.rate, 
     			date: exchangeParse.time.updated,
     			dateISO: exchangeParse.time.updatedISO
-    		})
+    		});
     		newExchangeRate.save(function(err, res){
     			if (err) return handleError(err);
     			console.log('rate', res);
-    		})
+    		});
   		}
 	});
 }, true);
@@ -48,12 +48,12 @@ request('https://blockchain.info/charts/$chart-type?format=json', function(error
 		// console.log(body);
 		// var blockchainParse = JSON.parse(body);
 	}
-})
+});
 
-app.get 
+// app.get 
 
 // Connections
-var port = 8081
+var port = 8081;
 
 var mongoUri = 'mongodb://localhost:27017/bitcurve';
 

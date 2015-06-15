@@ -24,16 +24,11 @@ app.config(function($stateProvider, $urlRouterProvider){
     templateUrl: "./templates/whatIsBitcoinTmpl.html",
     controller: "whatIsBitcoinCtrl"
   })
-  // USER ART
-  .state('userArt', {
-    url: "/userArt",
-    templateUrl: "./templates/userArtTmpl.html",
-    controller: "userArtCtrl"
-  })
-  .state('dashboard', {
-    url: "/dashboard",
-    templateUrl: "./templates/dashboard.html",
-    controller: "dashBoardCtrl"
+  // ART DASHBOARD
+  .state('artDashboard', {
+    url: "/artDashboard",
+    templateUrl: "./templates/artDashboardTmpl.html",
+    controller: "artDashboardCtrl"
   })
   .state('dashboard2', {
     url: "/dashboard2",
@@ -45,7 +40,12 @@ app.config(function($stateProvider, $urlRouterProvider){
     templateUrl: "./templates/whitney.html",
     controller: "whitneyCtrl"
   })
-
+  // ANALYTICS DASHBOARD
+  .state('analyticsDashboard', {
+    url: "/analyticsDashboard",
+    templateUrl: "./templates/analyticsDashboardTmpl.html",
+    controller: "analyticsDashboardCtrl"
+  });
   // LOGIN
   // .state('login', {
   //   url: "/login",
