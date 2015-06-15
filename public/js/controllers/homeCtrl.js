@@ -4,15 +4,17 @@ app.controller('homeCtrl', function($scope, homeService) {
 
 // LANDING PAGE D3 CHART
 //Defining the canvas parameters and an empty array nodes
-var w = 1260, 
+var w = 1500, 
     h = 500,
+    c = "d3Home",
     nodes = [],
     links = [];
 
 //Creating canvas and appending svg
-var canvas = d3.select("body").append("svg")
-    .attr("width", w)
-    .attr("height", h);
+var canvas = d3.select(".artExample").append("svg")
+    .attr("height", "100%")
+    .attr("width", "100%")
+    .attr("class", c);
 
 //Color function
 var fill = d3.scale.category20();
@@ -40,6 +42,10 @@ setInterval(function(){
 
   });
 
+  
+
+
+
   //Starts the simulation. Assigned only after nodes and links specified. 
   force.start();
 
@@ -57,5 +63,9 @@ setInterval(function(){
         .call(force.drag);
 
 }, 100); //define interval time
+
+
+
+
 	
 });	// End app.controller
