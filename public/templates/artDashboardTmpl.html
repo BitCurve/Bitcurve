@@ -1,12 +1,17 @@
 <!-- header is included already in the index.html -->
 <!-- write some html for the side radio buttons -->
-<!-- <select type="radio">
-  <option value=""></option>
-  <option value=""></option>
-  <option value=""></option>
-  <option value=""></option>
-  <option value=""></option>
-</select> -->
+
+<form name="dataChoices">
+	<label><input type="radio" ng-model="data.type" value="averageNumberOfTransactionsPerBlock">Average Number of Transactions Per Block</label>
+	<label><input type="radio" ng-model="data.type" value="dailyMinersRevenue">Daily Miners Revenue</label>
+	<label><input type="radio" ng-model="data.type" value="difficulty">Difficulty</label>
+	<label><input type="radio" ng-model="data.type" value="numberofUniqueBitcoinAddresses">Number of Unique Bitcoin Addresses</label>
+	<label><input type="radio" ng-model="data.type" value="price">Price</label>
+	<label><input type="radio" ng-model="data.type" value="totalCirculation">Total Circulation</label>
+	<label><input type="radio" ng-model="data.type" value="totalOutputVolumeValue">Total Output Volume Value</label>
+	<label><input type="radio" ng-model="data.type" value="totalTransactionFees">Total Transaction Fees</label>
+</form>
+<button ng-click="finalData(data)">Generate</button>
 
 
 <!-- <bitcoin-data final-data="finalData"></bitcoin-data>
