@@ -42,8 +42,8 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
  
  //color definition 
   var fill_color = d3.scale.ordinal()
-                  .domain(["low", "median", "high"])
-                  .range(["#000000", "#8cb4da", "#e08c4c"]);
+      .domain(["low", "median", "high"])
+      .range(["#ea7070", "#ad9d9d", "#6de09d"]);
  
  //custom chart that takes in data 
  var custom_chart = function(data) {

@@ -1,6 +1,6 @@
 var app = angular.module('bitcurve');
 
-app.controller('dashBoardCtrl', function($scope, dashBoardService){
+app.controller('analyticsDashboard', function($scope, dashBoardService){
 
 	
 		dashBoardService.getBitcoinPricing($scope).then(function(data){
