@@ -62,7 +62,7 @@ setInterval(function(){
         .style("stroke-width", "1.5px")
         .call(force.drag);
 
-}, 100); //define interval time
+}, 500); //define interval time
 
 
 

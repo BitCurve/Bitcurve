@@ -187,18 +187,20 @@ p {
 	font-size: 20px;
 	color: #FFF;
 	vertical-align: middle;
-	line-height: 5vw;
+	line-height: 5.5vw;
 }
 
 .btnLink-design {
 	background-color: #f3a734;
 	float: left;
 	margin-right: 2vw;
+	border-bottom: 7px solid #DB9E4D;/*#d69f56*/
 }
 
 .btnLink-github {
 	background-color: #323131;
 	float: right;
+	border-bottom: 7px solid #282828;
 }
 
 
