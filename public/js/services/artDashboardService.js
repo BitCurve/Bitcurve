@@ -1,3 +1,5 @@
+
+
 //to instantiate D3
 var custom_bubble_chart = (function(d3, CustomTooltip) {
   "use strict";
@@ -389,3 +391,5 @@ $(document).ready(function() {
     return false;
   });
 });
+
+
