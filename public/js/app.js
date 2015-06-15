@@ -26,19 +26,9 @@ app.config(function($stateProvider, $urlRouterProvider){
   })
   // ART DASHBOARD
   .state('artDashboard', {
-    url: "/artDashboard",
+    url: "/art-dashboard",
     templateUrl: "./templates/artDashboardTmpl.html",
     controller: "artDashboardCtrl"
-  })
-  .state('dashboard2', {
-    url: "/dashboard2",
-    templateUrl: "./dashboard2.html",
-    controller: "dashBoardCtrl"
-  })
-  .state('whitney', {
-    url: "/whitney",
-    templateUrl: "./templates/whitney.html",
-    controller: "whitneyCtrl"
   })
   // ANALYTICS DASHBOARD
   .state('analyticsDashboard', {
