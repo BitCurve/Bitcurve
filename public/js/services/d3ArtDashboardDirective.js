@@ -15,8 +15,8 @@
 				//one data object
 
 				//chart definitions
-				var width = 
-				var height = 
+				// var width = 
+				// var height = 
 
 
 
@@ -40,6 +40,7 @@
 					//update main components
 
 
-			});
-		}};
+			}
+		}
 	}]);
+})();

@@ -26,7 +26,7 @@ app.config(function($stateProvider, $urlRouterProvider){
   })
   // ART DASHBOARD
   .state('artDashboard', {
-    url: "/artDashboard",
+    url: "/art-dashboard",
     templateUrl: "./templates/artDashboardTmpl.html",
     controller: "artDashboardCtrl"
   })
