@@ -1,4 +1,8 @@
-var app = angular.module('bitcurve', ['ui.router']);
+var app = angular.module('bitcurve', ['ui.router', 'bitcurve.directives']);
+
+app.run(function($state, $rootScope){
+  $rootScope.$state = $state;
+})
 
 app.config(function($stateProvider, $urlRouterProvider){
 	$urlRouterProvider
