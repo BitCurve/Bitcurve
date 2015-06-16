@@ -2,10 +2,24 @@
 
 	angular.module('bitcurve')
 		.controller('artDashboardCtrl', ['$scope','artDashboardService', function($scope, artDashboardService){
+			var dataObj = {};
+			var averageNumberOfTransactionsPerBlock = [];
+			var dailyMinersRevenue = [];
+			var date = [];
+			var day = [];
+			var difficulty = [];
+			var month = [];
+			var numberofUniqueBitcoinAddresses = [];
+			var price = [];
+			var totalCirculation = [];
+			var totalOutputVolumeValue = [];
+			var totalTransactionFees = [];
+			var year = [];
+			var id = [];
 
-			$scope.$on('dataChange', function(event, data){
-				$scope.changeDisplay([data])
-			});
+			// $scope.$on('dataChange', function(event, data){
+			// 	$scope.changeDisplay([data])
+			// });
 	//2
 			$scope.getData = function() {
 				artDashboardService.getData().then(function(response) {
@@ -16,21 +30,10 @@
 						//difficulties = []
 						//volume = []
 						//transactionFees = []
-					// console.log("ctrl response", response);
-					var averageNumberOfTransactionsPerBlock = [];
-					var dailyMinersRevenue = [];
-					var date = [];
-					var day = [];
-					var difficulty = [];
-					var month = [];
-					var numberofUniqueBitcoinAddresses = [];
-					var price = [];
-					var totalCirculation = [];
-					var totalOutputVolumeValue = [];
-					var totalTransactionFees = [];
-					var year = [];
-					var id = [];
-
+					console.log("ctrl response", response);
+					dataObj = {
+						
+					}
 					response.map(function(res){
 						averageNumberOfTransactionsPerBlock.push(res.averageNumberOfTransactionsPerBlock);
 						dailyMinersRevenue.push(res.dailyMinersRevenue);
@@ -46,7 +49,7 @@
 						year.push(res.year);
 						id.push(res.id);
 					});
-					// console.log('averageNumberOfTransactionsPerBlock', averageNumberOfTransactionsPerBlock);
+					console.log('averageNumberOfTransactionsPerBlock', averageNumberOfTransactionsPerBlock);
 					// console.log('dailyMinersRevenue', dailyMinersRevenue);
 					// console.log('date', date);
 					// console.log('day', day);
@@ -75,28 +78,37 @@
 				switch(userSelect) {
 					case "averageNumberOfTransactionsPerBlock" :
 						console.log("hey averageNumberOfTransactionsPerBlock");
-						// Send averageNumberOfTransactionsPerBlock (array) to d3ArtDashboardDirective.js
+						artDashboardService.userDataSelection(averageNumberOfTransactionsPerBlock);
+						// Send/return averageNumberOfTransactionsPerBlock (array) to d3ArtDashboardDirective.js
+						// return averageNumberOfTransactionsPerBlock
 						break;
 					case "dailyMinersRevenue" :
 						console.log("hey dailyMinersRevenue");
+						artDashboardService.userDataSelection(dailyMinersRevenue);
 						break;
 					case "difficulty" :
 						console.log("hey difficulty");
+						artDashboardService.userDataSelection(difficulty);
 						break;
 					case "numberofUniqueBitcoinAddresses" :
-						console.log("hey numberofUniqueBitcoinAddressesy");
+						console.log("hey numberofUniqueBitcoinAddresses");
+						artDashboardService.userDataSelection(numberofUniqueBitcoinAddresses);
 						break;
 					case "price" :
 						console.log("hey price");
+						artDashboardService.userDataSelection(price);
 						break;
 					case "totalCirculation" :
 						console.log("hey totalCirculation");
+						artDashboardService.userDataSelection(totalCirculation);
 						break;
 					case "totalOutputVolumeValue" :
 						console.log("hey totalOutputVolumeValue");
+						artDashboardService.userDataSelection(totalOutputVolumeValue);
 						break;
 					case "totalTransactionFees" :
 						console.log("hey totalTransactionFees");
+						artDashboardService.userDataSelection(totalTransactionFees);
 						break;
 					default :
 						console.log("shoot me now");
