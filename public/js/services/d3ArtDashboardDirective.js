@@ -2,25 +2,24 @@
 
 	angular.module('bitcurve.directives', [])
 
-	.directive('bitcoinData', ['artDashboardService', function (artDashboardService){
+	.directive('bitcoinDirective', ['artDashboardService', function (artDashboardService){
 		return {
 			scope: {
 				//data types being passed through from controller to directive
 				finalData: '='
 			},
 			restrict: "EA",
-			link: function(scope, element, attrs) {
+			link: function(scope, elem, attrs) {
 				//create watcher to call updating function with different data type
-					// $scope.$watch("", function() {
-
-					// });
+					$scope.$watch("finalData", function() {
+						// NEEDSOMETHING($scope.finalData);
+					});
 
 				//one data object
 
-			/////////DEFINITION for CHART - start/////////
+			/////////DEFINITION for CHART/////////
 			//to instantiate D3
 			var custom_bubble_chart = (function(d3, CustomTooltip) {
-			  "use strict";
 
 				//defining the variables 
 				var width = 1400, //width
@@ -108,8 +107,8 @@
 
 			    /////////DRAW CHART/////////
 
-			    //appending svg
-			    vis = d3.select("#vis").append("svg") //this "#vis" is in index
+			    // D3 appending svg
+			    var vis = d3.select("#vis").append("svg") //this "#vis" is in index
 	                .attr("width", width)
 	                .attr("height", height)
 	                .append("g")
@@ -309,7 +308,6 @@
 				}
 
 				//*********DATA*********
-				// d3.json("data/csvtojson2.json", function(data) {
 				  d3.json("data/bitcurve.json", function(data) {
 				    custom_bubble_chart.init(data);
 				    custom_bubble_chart.toggle_view('all');
