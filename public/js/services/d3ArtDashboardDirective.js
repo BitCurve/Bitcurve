@@ -8,6 +8,7 @@
 				selectedData: '='
 			}, 	// end scope
 			restrict: "A",
+			template: "<div id='vis'></div>",
 			link: function(scope, element, attrs) {
 
 				var custom_chart;
@@ -26,8 +27,8 @@
 					var width = 1400,
 						height = 800,
 						tooltip = CustomTooltip("bitcurve_tooltip", 240),
-						layout_gravity = -0.01,
-						damper = 0.1,
+						// layout_gravity = -0.01,
+						// damper = 0.1,
 						nodes = [],
 						vis, force, circles, radius_scale, min_data, max_data, dataRange, lowdataRange, avedataRange;
 					//defining the center based on width and height
