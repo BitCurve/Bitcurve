@@ -8,10 +8,11 @@
 				selectedData: '='
 			}, 	// end scope
 			restrict: "A",
+			template: "<div id='vis'></div>",
 			link: function(scope, element, attrs) {
 
 				var custom_chart;
-				var CustomToolTip;
+				// var CustomTooltip;
 
 				scope.$watch('selectedData', function(){
 					// console.log("I'm changing", scope.selectedData);
@@ -25,8 +26,9 @@
 					//defining the parameters for custom_bubble_chart
 					var width = 1400,
 						height = 800,
-						layout_gravity = -0.01,
-						damper = 0.1,
+						tooltip = CustomTooltip("bitcurve_tooltip", 240),
+						// layout_gravity = -0.01,
+						// damper = 0.1,
 						nodes = [],
 						vis, force, circles, radius_scale, min_data, max_data, dataRange, lowdataRange, avedataRange;
 					//defining the center based on width and height
@@ -50,7 +52,7 @@
 				 
 					//custom chart that takes in data 
 					custom_chart = function(dataSelection) {
-						// console.log('check data', dataSelection);
+						console.log('check data', dataSelection);
 
 						max_data = d3.max(dataSelection, function(d) { return parseFloat(d.data, 10); } ); //function for the max data and parsing it into #
 						console.log("max_data", max_data);
@@ -79,18 +81,15 @@
 
 							// ***RANGE CONDITIONALS***
 							if (d.data >= min_data && d.data <= lowdataRange) {
-								// console.log("low data range", d.data);
 								d.group = "low";
 							}
 							else if (d.data > lowdataRange && d.data <= avedataRange) {
-								// console.log("median data range", d.data)
 								d.group = "median";
 							}
 							else if (d.data > avedataRange && d.data <= max_data) {
-								// console.log("high data range", d.data);
 								d.group = "high"
 							}
-							var node = { //refer data csv- file grant_title,id,organization,total_amount,group,Grant start date,start_month,start_day,start_year
+							var node = { //referring to data
 								year: parseInt(d.year),
 								id: parseInt(d.id),
 								group: d.group, 
@@ -99,16 +98,15 @@
 								x: Math.random() * 900, //defining x & y for the node to be placed anywhere on the canvas
 								y: Math.random() * 800
 							};
-							// console.log("node", node);
-							// console.log("d.radius", d.radius);
 							if (d.id) {
 								nodes.push(node); //push node into nodes
 							}
 
 						});	// end dataSelection.forEach
+
 						console.log("nodes", nodes);
 
-						nodes.sort(function(a, b) {return b.value- a.value; }); 
+						// nodes.sort(function(a, b) { return b.value - a.value; }); 
 
 						//appending svg 
 						vis = d3.select("#vis").append("svg") //this "#vis" is in index
@@ -212,51 +210,6 @@
 						var years = vis.selectAll(".years").remove();
 					}
 
-					// III. grouping all the data by CIRCULATION (by year)
-					function displayCirculationByMonth() {
-						force.gravity(layout_gravity)
-							.charge(charge)
-							.friction(0.9)
-							.on("tick", function(e) {
-							// console.log("e", e);
-								circles.each(moveCirculationTowardsMonth(e.alpha))
-									.attr("cx", function(d) { return d.x;})
-									.attr("cy", function(d) { return d.y;});
-						    });
-						force.start();
-						hide_years();
-					}
-					 
-					// moving the CIRCULATION data to its respective year
-					function moveCirculationTowardsMonth(alpha) {
-						return function(d) {
-							// console.log("d", d);
-							var target = month_centers[d.month];
-							// console.log("target", target);
-							d.x = d.x + (target.x - d.x) * (damper + 0.02) * alpha * 1.1;
-							d.y = d.y + (target.y - d.y) * (damper + 0.02) * alpha * 1.1;
-						};
-					}
-
-					// function display_months() {
-					// 	var months_x = {"1": width / 13, "2": (width / 13) * 2, "3": (width / 13) * 3, "4": (width / 13) * 4, "5": (width / 13) * 5, "6": (width / 13) * 6, "7": (width / 13) * 7, "8": (width / 13) * 8, "9": (width / 13) * 9, "10": (width / 13) * 10, "11": (width / 13) * 11, "12": (width / 13) * 12};
-					// 	var months_data = d3.keys(months_x);
-					// 	var months = vis.selectAll(".months")
-					// 		.data(months_data);
-
-					// 	months.enter().append("text")
-					// 		.attr("class", "months")
-					// 		.attr("x", function(d) { return months_x[d]; }  )
-					// 		.attr("y", 40)
-					// 		.attr("text-anchor", "middle")
-					// 		.text(function(d) { return d;});
-					// }
-
-					// function hide_months() {
-					// 	var months = vis.selectAll(".months").remove();
-					// }
-
-
 					//tooltip to show data details for each element
 					//this cannot be moved to 
 					function show_details(data, i, element) {
@@ -284,40 +237,40 @@
 					my_mod.display_all = display_group_all; //display all charts
 					my_mod.display_year = displayPriceByYear; //display year
 					// my_mod.display_volume = displayCirculationByMonth; // display volume by year
-					// my_mod.toggle_view = function(view_type) { 
-					//   console.log("view_type", view_type);
-					//   if (view_type == 'year') {
-					//     displayPriceByYear();
-					//   }
-					//   else if (view_type == 'circulation') {
-					//     displayCirculationByMonth();
-					//   } 
-					//   else {
-					//     display_group_all();
-					//     }
-					//   };
+					my_mod.toggle_view = function(view_type) { 
+					  // console.log("view_type", view_type);
+					  if (view_type == 'year') {
+					    displayPriceByYear();
+					  }
+					  // else if (view_type == 'circulation') {
+					  //   displayCirculationByMonth();
+					  // } 
+					  else {
+					    display_group_all();
+					    }
+					  };
 
 					return my_mod;
-				})(d3); // end custom_bubble_chart //pass d3 and customToolTip 	
+				})(d3, CustomTooltip); // end custom_bubble_chart //pass d3 and CustomTooltip 	
 
 				//*********CUSTOM TOOLTIP******** ?????????????????????
-				CustomTooltip = function(tooltipId, width){
-					console.log('tooltipId', tooltipId)
+				function CustomTooltip (tooltipId, width){
+					// console.log('tooltipId', tooltipId)
 					var tooltipId = tooltipId;
-					$("body").append("<div class='tooltip' id='"+ tooltipId +"'></div>");
+					$("body").append("<div class='tooltip' id='" + tooltipId + "'></div>");
 					if (width){
-						$("#"+tooltipId).css("width", width);
+						$("#" + tooltipId).css("width", width);
 					}
 					hideTooltip();
 
 					function showTooltip(content, event){
-						$("#"+tooltipId).html(content);
-						$("#"+tooltipId).show();
+						$("#" + tooltipId).html(content);
+						$("#" + tooltipId).show();
 						updatePosition(event);
 					}
 
 					function hideTooltip(){
-						$("#"+tooltipId).hide();
+						$("#" + tooltipId).hide();
 					}
 
 					function updatePosition(event){
@@ -346,21 +299,21 @@
 						hideTooltip: hideTooltip,
 						updatePosition: updatePosition
 					};
-				};	// end customToolTip
-				customToolTip();
+				};	// end CustomTooltip
+				// CustomTooltip();
 
 				// part of tooltip
-				// function addCommas(nStr) {
-				// 	nStr += '';
-				// 	x = nStr.split('.');
-				// 	x1 = x[0];
-				// 	x2 = x.length > 1 ? '.' + x[1] : '';
-				// 	var rgx = /(\d+)(\d{3})/;
-				// 	while (rgx.test(x1)) {
-				// 		x1 = x1.replace(rgx, '$1' + ',' + '$2');
-				// 	}
-				// 	return x1 + x2;
-				// }
+				function addCommas(nStr) {
+					nStr += '';
+					x = nStr.split('.');
+					x1 = x[0];
+					x2 = x.length > 1 ? '.' + x[1] : '';
+					var rgx = /(\d+)(\d{3})/;
+					while (rgx.test(x1)) {
+						x1 = x1.replace(rgx, '$1' + ',' + '$2');
+					}
+					return x1 + x2;
+				}
 
 				//*********DATA*********
 				// d3.json("data/csvtojson2.json", function(data) {
