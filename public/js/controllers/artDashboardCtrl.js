@@ -1,55 +1,98 @@
 (function() {
 
 	angular.module('bitcurve')
-		.controller('artDashboardCtrl', ['$scope','artDashboardService', function($scope, artDashboardService){
-			var dataObj = {};
+		.controller('artDashboardCtrl', ['$scope','artDashboardService', '$rootScope', function($scope, artDashboardService, $rootScope){
+
+			$scope.$on('dataChange', function(event, data){
+				$scope.getData([data]);
+			})
+
 			var averageNumberOfTransactionsPerBlock = [];
+			var transactionsObj = {};
 			var dailyMinersRevenue = [];
+			var minersObj = {};
 			var date = [];
 			var day = [];
 			var difficulty = [];
+			var difficultyObj = {};
 			var month = [];
 			var numberofUniqueBitcoinAddresses = [];
+			var addressesObj = {};
 			var price = [];
+			var priceObj = {};
 			var totalCirculation = [];
+			var circulationObj = {};
 			var totalOutputVolumeValue = [];
+			var outputObj = {};
 			var totalTransactionFees = [];
+			var feesObj = {};
 			var year = [];
 			var id = [];
 
 			// $scope.$on('dataChange', function(event, data){
 			// 	$scope.changeDisplay([data])
 			// });
-	//2
 			$scope.getData = function() {
 				artDashboardService.getData().then(function(response) {
-					//map through response data and populate various arrays
-
-						//price = []
-						//minersRevenue = []
-						//difficulties = []
-						//volume = []
-						//transactionFees = []
-					console.log("ctrl response", response);
-					dataObj = {
-						
-					}
+					transactionsObj = {};
 					response.map(function(res){
-						averageNumberOfTransactionsPerBlock.push(res.averageNumberOfTransactionsPerBlock);
-						dailyMinersRevenue.push(res.dailyMinersRevenue);
-						date.push(res.date);
-						day.push(res.day);
-						difficulty.push(res.difficulty);
-						month.push(res.month);
-						numberofUniqueBitcoinAddresses.push(res.numberofUniqueBitcoinAddresses);
-						price.push(res.price);
-						totalCirculation.push(res.totalCirculation);
-						totalOutputVolumeValue.push(res.totalOutputVolumeValue);
-						totalTransactionFees.push(res.totalTransactionFees);
-						year.push(res.year);
-						id.push(res.id);
+						transactionsObj = {
+							data: res.averageNumberOfTransactionsPerBlock,
+							year: res.year,
+							id: res.id
+						}
+						averageNumberOfTransactionsPerBlock.push(transactionsObj);
+
+						minersObj = {
+							data: res.dailyMinersRevenue,
+							year: res.year,
+							id: res.id
+						}
+						dailyMinersRevenue.push(minersObj);
+
+						difficultyObj = {
+							data: res.difficulty,
+							year: res.year,
+							id: res.id
+						}
+						difficulty.push(difficultyObj);
+
+						addressesObj = {
+							data: res.numberofUniqueBitcoinAddresses,
+							year: res.year,
+							id: res.id
+						}
+						numberofUniqueBitcoinAddresses.push(addressesObj);
+
+						priceObj = {
+							data: res.price,
+							year: res.year,
+							id: res.id
+						}
+						price.push(priceObj);
+
+						circulationObj = {
+							data: res.totalCirculation,
+							year: res.year,
+							id: res.id
+						}
+						totalCirculation.push(circulationObj);
+
+						outputObj = {
+							data: res.totalOutputVolumeValue,
+							year: res.year,
+							id: res.id
+						}
+						totalOutputVolumeValue.push(outputObj);
+
+						feesObj = {
+							data: res.totalTransactionFees,
+							year: res.year,
+							id: res.id
+						}
+						totalTransactionFees.push(feesObj);
 					});
-					console.log('averageNumberOfTransactionsPerBlock', averageNumberOfTransactionsPerBlock);
+					// console.log('averageNumberOfTransactionsPerBlock', averageNumberOfTransactionsPerBlock);
 					// console.log('dailyMinersRevenue', dailyMinersRevenue);
 					// console.log('date', date);
 					// console.log('day', day);
@@ -74,47 +117,44 @@
 				for (var key in dataSelection) {
 					userSelect = dataSelection[key];
 				}
-				console.log("userSelect", userSelect);
-				switch(userSelect) {
-					case "averageNumberOfTransactionsPerBlock" :
-						console.log("hey averageNumberOfTransactionsPerBlock");
-						artDashboardService.userDataSelection(averageNumberOfTransactionsPerBlock);
-						// Send/return averageNumberOfTransactionsPerBlock (array) to d3ArtDashboardDirective.js
-						// return averageNumberOfTransactionsPerBlock
-						break;
-					case "dailyMinersRevenue" :
-						console.log("hey dailyMinersRevenue");
-						artDashboardService.userDataSelection(dailyMinersRevenue);
-						break;
-					case "difficulty" :
-						console.log("hey difficulty");
-						artDashboardService.userDataSelection(difficulty);
-						break;
-					case "numberofUniqueBitcoinAddresses" :
-						console.log("hey numberofUniqueBitcoinAddresses");
-						artDashboardService.userDataSelection(numberofUniqueBitcoinAddresses);
-						break;
-					case "price" :
-						console.log("hey price");
-						artDashboardService.userDataSelection(price);
-						break;
-					case "totalCirculation" :
-						console.log("hey totalCirculation");
-						artDashboardService.userDataSelection(totalCirculation);
-						break;
-					case "totalOutputVolumeValue" :
-						console.log("hey totalOutputVolumeValue");
-						artDashboardService.userDataSelection(totalOutputVolumeValue);
-						break;
-					case "totalTransactionFees" :
-						console.log("hey totalTransactionFees");
-						artDashboardService.userDataSelection(totalTransactionFees);
-						break;
-					default :
-						console.log("shoot me now");
+				// console.log("userSelect", userSelect);
+				if (userSelect === "averageNumberOfTransactionsPerBlock") {
+					// console.log('averageNumberOfTransactionsPerBlock', averageNumberOfTransactionsPerBlock)
+					$scope.selectedData = averageNumberOfTransactionsPerBlock;
 				}
-
+				else if (userSelect === "dailyMinersRevenue") {
+					// console.log('dailyMinersRevenue', dailyMinersRevenue)
+					$scope.selectedData = dailyMinersRevenue;
+				}
+				else if (userSelect === "difficulty") {
+					// console.log('difficulty', difficulty)
+					$scope.selectedData = difficulty;
+				}
+				else if (userSelect === "numberofUniqueBitcoinAddresses") {
+					// console.log('numberofUniqueBitcoinAddresses', numberofUniqueBitcoinAddresses)
+					$scope.selectedData = numberofUniqueBitcoinAddresses;
+				}
+				else if (userSelect === "price") {
+					// console.log('price', price)
+					$scope.selectedData = price;
+				}
+				else if (userSelect === "totalCirculation") {
+					// console.log('totalCirculation', totalCirculation)
+					$scope.selectedData = totalCirculation;
+				}
+				else if (userSelect === "totalOutputVolumeValue") {
+					// console.log('totalOutputVolumeValue', totalOutputVolumeValue)
+					$scope.selectedData = totalOutputVolumeValue;
+				}
+				else if (userSelect === "totalTransactionFees") {
+					// console.log('totalTransactionFees', totalTransactionFees)
+					$scope.selectedData = totalTransactionFees;
+				}
+				// console.log("root", $rootScope);
+				// console.log("selData", $scope.selectedData);
+				$rootScope.$broadcast('dataChange');
 			}	// End $scope.finalData
+		$scope.test = "testing this out";
 
 		}])//end controller
 
