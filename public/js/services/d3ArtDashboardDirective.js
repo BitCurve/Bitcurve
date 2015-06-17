@@ -8,7 +8,7 @@
 				selectedData: '='
 			}, 	// end scope
 			restrict: "A",
-			template: "<div id='artData'></div>",
+			template: "<div id='vis'></div>",
 			link: function(scope, element, attrs) {
 
 
@@ -20,7 +20,7 @@
 // *********** BEGIN D3 ***********
 
 				var custom_chart;
-				var CustomTooltip;
+				// var CustomTooltip;
 
 				var custom_bubble_chart = (function(d3) {
 
@@ -28,8 +28,8 @@
 				var dataSelection = scope.selectedData;
 
 				//DEFINGING the VARIABLES
-				var width = 1400,
-					height = 800,
+				var width = 1260,
+					height = 820,
 					tooltip = CustomTooltip("bitcurve_tooltip", 240),
 					layout_gravity = -0.01,
 					damper = 0.1,
@@ -89,7 +89,7 @@
 				};
 				groupLevel();
 				 
-				//create node objects from original data that will serve as the data behind each bubble in the vis, then add each node to nodes to be used later
+				//create node objects from original data that will serve as the data behind each bubble in the chart, then add each node to nodes to be used later
 				dataSelection.forEach(function(d){ //The forEach() method executes a provided function once per array element.
 					// console.log("d", d);
 
@@ -126,29 +126,34 @@
 
 				//DRAWING D3 CHART 
 				//APPEND SVG
-				chart = d3.select("#artData").append("svg") //this "#vis" is in index
+				chart = d3.select("#vis").append("svg") //this "#chart" is in index
 		            .attr("width", width)
-		            .attr("height", height)
-		            // .attr("id", "svg_vis"); // Applies an id of 'svg_vis' to the actual svg div 
+		            .attr("height", height);
+		            // .attr("id", "svg_chart"); // Applies an id of 'svg_chart' to the actual svg div 
 
 				//CREATE & APPEND CIRCLES
 				circles = chart.selectAll("circle")
 					.data(nodes, function(d) { return d.id ;});
-						circles.enter().append("circle")
-							.attr("r", 0)
-							.attr("fill", function(d) { return fill_color(d.group) ;})
-							.attr("stroke-width", 2)
-							.attr("stroke", function(d) {return d3.rgb(fill_color(d.group)).darker();})
-							.attr("id", function(d) { return  "bubble_" + d.id; })
-							.on("mouseover", function(d, i) {show_details(d, i, this);} )
-							.on("mouseout", function(d, i) {hide_details(d, i, this);} );
+
+						
+				circles.enter().append("circle")
+					.attr("r", 0)
+					.attr("fill", function(d) { return fill_color(d.group) ;})
+					.attr("stroke-width", 2)
+					.attr("stroke", function(d) {return d3.rgb(fill_color(d.group)).darker();})
+					.attr("id", function(d) { return "bubble_" + d.id; })
+					.on("mouseover", function(d, i) {show_details(d, i, this);} )
+					.on("mouseout", function(d, i) {hide_details(d, i, this);} );
 
 				//D3 TRANISITON
 				circles.transition().duration(2000).attr("r", function(d) { return d.radius; });
 		 
-			};	// end function custom_chart
+			};	
+
+			// END function CUSTOM_CHART
 		 		
-		 		//D3 ANIMATION FUNCTION
+		 		//FORCE
+		 		//D3 GLOBAL FUNCTION FOR GROUPING the DATA (below)
 				//start the simulation 
 				function start() {
 					force = d3.layout.force()
@@ -210,7 +215,7 @@
 				function display_years() {
 					var years_x = {"2009": width / 8, "2010": (width / 8) * 2, "2011": (width / 8) * 3, "2012": (width / 8) * 4, "2013": (width / 8) * 5, "2014": (width / 8) * 6, "2015": (width / 8) * 7};
 					var years_data = d3.keys(years_x);
-					var years = vis.selectAll(".years")
+					var years = chart.selectAll(".years")
 						.data(years_data);
 					years.enter().append("text")
 						.attr("class", "years")
@@ -221,11 +226,11 @@
 				}
 				//hide till its clicked
 				function hide_years() {
-					var years = vis.selectAll(".years").remove();
+					var years = chart.selectAll(".years").remove();
 				}
 
+				//TOOLTIP
 				//tooltip to show data details for each element
-				//this cannot be moved to 
 				function show_details(data, i, element) {
 					d3.select(element).attr("stroke", "black");
 					var content = "<span class=\"name\">Price:</span><span class=\"value\"> $" + addCommas(data.price) + "</span><br/>";
@@ -240,9 +245,10 @@
 					tooltip.hideTooltip();
 				}
 
+				//CREATE AN EMPTY OBJECT MOD
 				//collects display_all and display_year in an object and returns that object
 				var my_mod = {};
-				my_mod.init = function (_data) { //what is _data? .init is initializing 
+				my_mod.init = function (_data) { 
 					custom_chart(_data);
 					start();
 					//console.log(my_mod);
@@ -265,68 +271,72 @@
 				  };
 
 				return my_mod;
-			})(d3, CustomTooltip); // end custom_bubble_chart //pass d3 and CustomTooltip 	
+				
+				})(d3, CustomTooltip); // end custom_bubble_chart //pass d3 and CustomTooltip 	
 
-				//*********CUSTOM TOOLTIP******** ?????????????????????
-				function CustomTooltip (tooltipId, width){
-					// console.log('tooltipId', tooltipId)
-					var tooltipId = tooltipId;
-					$("body").append("<div class='tooltip' id='" + tooltipId + "'></div>");
-					if (width){
-						$("#" + tooltipId).css("width", width);
-					}
-					hideTooltip();
+				//*********CUSTOM TOOLTIP******** 
+				function CustomTooltip(tooltipId, width){
+				  var tooltipId = tooltipId;
+				  $("body").append("<div class='tooltip' id='"+tooltipId+"'></div>");
+				  
+				  if(width){
+				    $("#"+tooltipId).css("w-th", width);
+				  }
+				  
+				  hideTooltip();
+				  
+				  function showTooltip(content, event){
+				    $("#"+tooltipId).html(content);
+				    $("#"+tooltipId).show();
+				    
+				    updatePosition(event);
+				  }
+				  
+				  function hideTooltip(){
+				    $("#"+tooltipId).hide();
+				  }
+				  
+				  function updatePosition(event){
+				    var ttid = "#"+tooltipId;
+				    var xOffset = 20;
+				    var yOffset = 10;
+				    
+				     var ttw = $(ttid).width();
+				     var tth = $(ttid).height();
+				     var wscrY = $(window).scrollTop();
+				     var wscrX = $(window).scrollLeft();
+				     var curX = (document.all) ? event.clientX + wscrX : event.pageX;
+				     var curY = (document.all) ? event.clientY + wscrY : event.pageY;
+				     var ttleft = ((curX - wscrX + xOffset*2 + ttw) > $(window).width()) ? curX - ttw - xOffset*2 : curX + xOffset;
+				     if (ttleft < wscrX + xOffset){
+				      ttleft = wscrX + xOffset;
+				     } 
+				     var tttop = ((curY - wscrY + yOffset*2 + tth) > $(window).height()) ? curY - tth - yOffset*2 : curY + yOffset;
+				     if (tttop < wscrY + yOffset){
+				      tttop = curY + yOffset;
+				     } 
+				     $(ttid).css('top', tttop + 'px').css('left', ttleft + 'px');
+				  }
+				  
+				  return {
+				    showTooltip: showTooltip,
+				    hideTooltip: hideTooltip,
+				    updatePosition: updatePosition
+				  };
+				}
 
-					function showTooltip(content, event){
-						$("#" + tooltipId).html(content);
-						$("#" + tooltipId).show();
-						updatePosition(event);
-					}
-
-					function hideTooltip(){
-						$("#" + tooltipId).hide();
-					}
-
-					function updatePosition(event){
-						var ttid = "#"+tooltipId;
-						var xOffset = 20;
-						var yOffset = 10;
-
-						var ttw = $(ttid).width();
-						var tth = $(ttid).height();
-						var wscrY = $(window).scrollTop();
-						var wscrX = $(window).scrollLeft();
-						var curX = (document.all) ? event.clientX + wscrX : event.pageX;
-						var curY = (document.all) ? event.clientY + wscrY : event.pageY;
-						var ttleft = ((curX - wscrX + xOffset*2 + ttw) > $(window).width()) ? curX - ttw - xOffset*2 : curX + xOffset;
-						if (ttleft < wscrX + xOffset){
-							ttleft = wscrX + xOffset;
-						} 
-						var tttop = ((curY - wscrY + yOffset*2 + tth) > $(window).height()) ? curY - tth - yOffset*2 : curY + yOffset;
-						if (tttop < wscrY + yOffset){
-							tttop = curY + yOffset;
-						} 
-						$(ttid).css('top', tttop + 'px').css('left', ttleft + 'px');
-					}
-					return {
-						showTooltip: showTooltip,
-						hideTooltip: hideTooltip,
-						updatePosition: updatePosition
-					};
-				};	// end CustomTooltip
-				// CustomTooltip();
-
-				// part of tooltip
-				function addCommas(nStr) {
-					nStr += '';
-					x = nStr.split('.');
-					x1 = x[0];
-					x2 = x.length > 1 ? '.' + x[1] : '';
-					var rgx = /(\d+)(\d{3})/;
-					while (rgx.test(x1)) {
-						x1 = x1.replace(rgx, '$1' + ',' + '$2');
-					}
-					return x1 + x2;
+				//part of tooltip, adding commas
+				function addCommas(nStr)
+				{
+				 nStr += '';
+				 x = nStr.split('.');
+				 x1 = x[0];
+				 x2 = x.length > 1 ? '.' + x[1] : '';
+				 var rgx = /(\d+)(\d{3})/;
+				 while (rgx.test(x1)) {
+				   x1 = x1.replace(rgx, '$1' + ',' + '$2');
+				 }
+				 return x1 + x2;
 				}
 
 				//*********DATA*********
