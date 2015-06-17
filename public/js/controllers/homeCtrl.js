@@ -24,7 +24,7 @@ var force = d3.layout.force() //initiate force
     .nodes(nodes)
     .links([]) 
     .size([w, h]);
-	console.log(force);
+	// console.log(force);
 
 	//Registers the specified listener to receive events of the specified type from the force layout; pulls all the symbols together
 	force.on("tick", function(d) {

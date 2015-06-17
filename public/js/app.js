@@ -1,4 +1,8 @@
-var app = angular.module('bitcurve', ['ui.router']);
+var app = angular.module('bitcurve', ['ui.router', 'bitcurve.directives']);
+
+app.run(function($state, $rootScope){
+  $rootScope.$state = $state;
+})
 
 app.config(function($stateProvider, $urlRouterProvider){
 	$urlRouterProvider
@@ -26,7 +30,7 @@ app.config(function($stateProvider, $urlRouterProvider){
   })
   // ART DASHBOARD
   .state('artDashboard', {
-    url: "/artDashboard",
+    url: "/art-dashboard",
     templateUrl: "./templates/artDashboardTmpl.html",
     controller: "artDashboardCtrl"
   })
