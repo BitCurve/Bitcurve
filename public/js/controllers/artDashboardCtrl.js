@@ -150,11 +150,9 @@
 					// console.log('totalTransactionFees', totalTransactionFees)
 					$scope.selectedData = totalTransactionFees;
 				}
-				// console.log("root", $rootScope);
 				// console.log("selData", $scope.selectedData);
 				$rootScope.$broadcast('dataChange');
 			}	// End $scope.finalData
-		$scope.test = "testing this out";
 
 		}])//end controller
 
