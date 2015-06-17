@@ -8,117 +8,132 @@
 				selectedData: '='
 			}, 	// end scope
 			restrict: "A",
-			template: "<div id='vis'></div>",
+			template: "<div id='artData'></div>",
 			link: function(scope, element, attrs) {
 
-				var custom_chart;
-				// var CustomTooltip;
 
 				scope.$watch('selectedData', function(){
 					// console.log("I'm changing", scope.selectedData);
 					custom_chart(scope.selectedData);
-				})	// end scope.$watch
+				});	// end scope.$watch
 
-				var dataSelection = scope.selectedData
+// *********** BEGIN D3 ***********
 
-				// *********** BEGIN D3 ***********
+				var custom_chart;
+				var CustomTooltip;
+
 				var custom_bubble_chart = (function(d3) {
-					//defining the parameters for custom_bubble_chart
-					var width = 1400,
-						height = 800,
-						tooltip = CustomTooltip("bitcurve_tooltip", 240),
-						// layout_gravity = -0.01,
-						// damper = 0.1,
-						nodes = [],
-						vis, force, circles, radius_scale, min_data, max_data, dataRange, lowdataRange, avedataRange;
-					//defining the center based on width and height
-					var center = {x: width / 2, y: height / 2}; 
 
-					//defining the area for all the years when split
-					var year_centers = {
-						"2009": {x: width / 8, y: height / 2},
-						"2010": {x: (width / 8) * 2, y: height / 2},
-						"2011": {x: (width / 8) * 3, y: height / 2},
-						"2012": {x: (width / 8) * 4, y: height / 2},
-						"2013": {x: (width / 8) * 5, y: height / 2},
-						"2014": {x: (width / 8) * 6, y: height / 2},
-						"2015": {x: (width / 8) * 7, y: height / 2}
+				//DATA 
+				var dataSelection = scope.selectedData;
+
+				//DEFINGING the VARIABLES
+				var width = 1400,
+					height = 800,
+					tooltip = CustomTooltip("bitcurve_tooltip", 240),
+					layout_gravity = -0.01,
+					damper = 0.1,
+					nodes = [],
+					chart, 
+					force, 
+					circles, 
+					radius_scale, 
+					min_data, 
+					max_data, 
+					dataRange, 
+					lowdataRange, 
+					avedataRange;
+
+				//DEFINING the CENTER for the CANVAS
+				var center = {x: width / 2, y: height / 2}; 
+
+				//DEFINING the AREA for YEARS DISPLAY
+				var year_centers = {
+					"2009": {x: width / 8, y: height / 2},
+					"2010": {x: (width / 8) * 2, y: height / 2},
+					"2011": {x: (width / 8) * 3, y: height / 2},
+					"2012": {x: (width / 8) * 4, y: height / 2},
+					"2013": {x: (width / 8) * 5, y: height / 2},
+					"2014": {x: (width / 8) * 6, y: height / 2},
+					"2015": {x: (width / 8) * 7, y: height / 2}
+				};
+
+				//DEIFINING THE COLORS
+				var fill_color = d3.scale.ordinal()
+					.domain(["low", "median", "high"])
+					.range(["#ea7070", "#ad9d9d", "#6de09d"]);
+				 
+				//CUSTOM CHART THAT TAKES in all DATA
+				//DEFINE MAX & MIN for DATA 
+				custom_chart = function(dataSelection) { //start function custom_chart
+					console.log('check data', dataSelection);
+
+					max_data = d3.max(dataSelection, function(d) { return parseFloat(d.data, 10); } ); //function for the max data and parsing it into #
+					console.log("max_data", max_data);
+					min_data = d3.min(dataSelection, function(d) { return parseFloat(d.data, 10); } );
+					console.log("min_data", min_data);
+					radius_scale = d3.scale.pow().exponent(0.5) //pow.exponent takes in an exponent value
+						.domain([0, max_data])
+						.range([2, 50]);
+
+				//DEFINING the RANGES for DATA
+				var groupLevel = function(){
+					// console.log("the low is 0");
+					dataRange = parseFloat(max_data - min_data).toFixed(5);
+					console.log("dataRange", dataRange);
+					lowdataRange = parseFloat(min_data + (dataRange / 3)).toFixed(5);
+					console.log("lowdataRange", lowdataRange);
+					avedataRange = parseFloat(min_data + ((dataRange / 3) * 2)).toFixed(5);
+					console.log("avePriceRange", avedataRange);
+					// console.log("the high", max_price);
+				};
+				groupLevel();
+				 
+				//create node objects from original data that will serve as the data behind each bubble in the vis, then add each node to nodes to be used later
+				dataSelection.forEach(function(d){ //The forEach() method executes a provided function once per array element.
+					// console.log("d", d);
+
+					//RANGE CONDITIONALS for GROUPING the DATA
+					if (d.data >= min_data && d.data <= lowdataRange) {
+						d.group = "low";
+					}
+					else if (d.data > lowdataRange && d.data <= avedataRange) {
+						d.group = "median";
+					}
+					else if (d.data > avedataRange && d.data <= max_data) {
+						d.group = "high";
+					}
+
+					//DEFINING NODE
+					var node = { //referring to data
+						year: parseInt(d.year),
+						id: parseInt(d.id),
+						group: d.group, 
+						value: d.data,
+						radius: radius_scale(parseFloat(d.data, 10)),
+						x: Math.random() * 900, //defining x & y for the node to be placed anywhere on the canvas
+						y: Math.random() * 800
 					};
+					if (d.id) {
+						nodes.push(node); //push node into nodes
+					}
 
-					//color definition 
-					var fill_color = d3.scale.ordinal()
-						.domain(["low", "median", "high"])
-						.range(["#ea7070", "#ad9d9d", "#6de09d"]);
-				 
-					//custom chart that takes in data 
-					custom_chart = function(dataSelection) {
-						console.log('check data', dataSelection);
+				});	// end dataSelection.forEach
 
-						max_data = d3.max(dataSelection, function(d) { return parseFloat(d.data, 10); } ); //function for the max data and parsing it into #
-						console.log("max_data", max_data);
-						min_data = d3.min(dataSelection, function(d) { return parseFloat(d.data, 10); } );
-						console.log("min_data", min_data);
-						radius_scale = d3.scale.pow().exponent(0.5) //pow.exponent takes in an exponent value
-							.domain([0, max_data])
-							.range([2, 50]);
+				console.log("nodes", nodes);
 
-						var groupLevel = function(){
-							// console.log("the low is 0");
-							dataRange = parseFloat(max_data - min_data).toFixed(5);
-							console.log("dataRange", dataRange);
-							lowdataRange = parseFloat(min_data + (dataRange / 3)).toFixed(5);
-							console.log("lowdataRange", lowdataRange);
-							avedataRange = parseFloat(min_data + ((dataRange / 3) * 2)).toFixed(5);
-							console.log("avePriceRange", avedataRange);
-							// console.log("the high", max_price);
-						};
-						groupLevel();
-				 
-						// var dateFormat = d3.time.format('%m/%d/%Y %H:%M:%S');
-						//create node objects from original data that will serve as the data behind each bubble in the vis, then add each node to nodes to be used later
-						dataSelection.forEach(function(d){ //The forEach() method executes a provided function once per array element.
-							// console.log("d", d);
+				// nodes.sort(function(a, b) { return b.value - a.value; }); 
 
-							// ***RANGE CONDITIONALS***
-							if (d.data >= min_data && d.data <= lowdataRange) {
-								d.group = "low";
-							}
-							else if (d.data > lowdataRange && d.data <= avedataRange) {
-								d.group = "median";
-							}
-							else if (d.data > avedataRange && d.data <= max_data) {
-								d.group = "high"
-							}
-							var node = { //referring to data
-								year: parseInt(d.year),
-								id: parseInt(d.id),
-								group: d.group, 
-								value: d.data,
-								radius: radius_scale(parseFloat(d.data, 10)),
-								x: Math.random() * 900, //defining x & y for the node to be placed anywhere on the canvas
-								y: Math.random() * 800
-							};
-							if (d.id) {
-								nodes.push(node); //push node into nodes
-							}
+				//DRAWING D3 CHART 
+				//APPEND SVG
+				chart = d3.select("#artData").append("svg") //this "#vis" is in index
+		            .attr("width", width)
+		            .attr("height", height)
+		            // .attr("id", "svg_vis"); // Applies an id of 'svg_vis' to the actual svg div 
 
-						});	// end dataSelection.forEach
-
-						console.log("nodes", nodes);
-
-						// nodes.sort(function(a, b) { return b.value - a.value; }); 
-
-						//appending svg 
-						vis = d3.select("#vis").append("svg") //this "#vis" is in index
-				            .attr("width", width)
-				            .attr("height", height)
-				            .attr("id", "svg_vis"); // Applies an id of 'svg_vis' to the actual svg div 
-
-						//creating circles and binding data
-						circles = vis.selectAll("circle")
-							.data(nodes, function(d) { return d.id ;});
-
-						//appending circle with attributes
+				//CREATE & APPEND CIRCLES
+				circles = chart.selectAll("circle")
+					.data(nodes, function(d) { return d.id ;});
 						circles.enter().append("circle")
 							.attr("r", 0)
 							.attr("fill", function(d) { return fill_color(d.group) ;})
@@ -128,130 +143,129 @@
 							.on("mouseover", function(d, i) {show_details(d, i, this);} )
 							.on("mouseout", function(d, i) {hide_details(d, i, this);} );
 
-						//d3 transition
-						circles.transition().duration(2000).attr("r", function(d) { return d.radius; });
-				 
-					};	// end function custom_chart
-				 
-					//charge strength to the specified value.
-					function charge(d) {
-						return -Math.pow(d.radius, 2.0) / 8;
-					}
+				//D3 TRANISITON
+				circles.transition().duration(2000).attr("r", function(d) { return d.radius; });
+		 
+			};	// end function custom_chart
+		 		
+		 		//D3 ANIMATION FUNCTION
+				//start the simulation 
+				function start() {
+					force = d3.layout.force()
+				        .nodes(nodes)
+				        .size([width, height]);
+				}
+				//charge strength to the specified value.
+				function charge(d) {
+					return -Math.pow(d.radius, 2.0) / 8;
+				}
 
-					//start the simulation 
-					function start() {
-						force = d3.layout.force()
-					        .nodes(nodes)
-					        .size([width, height]);
-					}
+				//GROUPING THE DATA 
+				//I. grouping all the data points
+				function display_group_all() {
+					force.gravity(layout_gravity)
+						.charge(charge)
+						.friction(0.9)
+						.on("tick", function(e) {
+							circles.each(move_towards_center(e.alpha))
+								.attr("cx", function(d) {return d.x;})
+								.attr("cy", function(d) {return d.y;});
+							});
+					force.start();
+					hide_years();
+				}
 
-					//GROUPING THE DATA 
-
-					//I. grouping all the data points
-					function display_group_all() {
-						force.gravity(layout_gravity)
-							.charge(charge)
-							.friction(0.9)
-							.on("tick", function(e) {
-								circles.each(move_towards_center(e.alpha))
-									.attr("cx", function(d) {return d.x;})
-									.attr("cy", function(d) {return d.y;});
-								});
-						force.start();
-						hide_years();
-					}
-
-					//moving the data to the center
-					function move_towards_center(alpha) {
-						return function(d) {
-							d.x = d.x + (center.x - d.x) * (damper + 0.02) * alpha;
-							d.y = d.y + (center.y - d.y) * (damper + 0.02) * alpha;
-						};
-					}
-
-					//II. grouping all the data by PRICE (by year)
-					function displayPriceByYear() {
-						force.gravity(layout_gravity)
-							.charge(charge)
-							.friction(0.9)
-							.on("tick", function(e) {
-								circles.each(move_towards_year(e.alpha))
-									.attr("cx", function(d) {return d.x;})
-									.attr("cy", function(d) {return d.y;});
-								});
-						force.start();
-						display_years();
-					}
-
-					//moving the PRICE data to its respective year
-					function move_towards_year(alpha) {
-						return function(d) {
-							var target = year_centers[d.year];
-							d.x = d.x + (target.x - d.x) * (damper + 0.02) * alpha * 1.1;
-							d.y = d.y + (target.y - d.y) * (damper + 0.02) * alpha * 1.1;
-						};
-					}
-					 
-					//setting up area for split years
-					function display_years() {
-						var years_x = {"2009": width / 8, "2010": (width / 8) * 2, "2011": (width / 8) * 3, "2012": (width / 8) * 4, "2013": (width / 8) * 5, "2014": (width / 8) * 6, "2015": (width / 8) * 7};
-						var years_data = d3.keys(years_x);
-						var years = vis.selectAll(".years")
-							.data(years_data);
-						years.enter().append("text")
-							.attr("class", "years")
-							.attr("x", function(d) { return years_x[d]; }  )
-							.attr("y", 40)
-							.attr("text-anchor", "middle")
-							.text(function(d) { return d;});
-					}
-					//hide till its clicked
-					function hide_years() {
-						var years = vis.selectAll(".years").remove();
-					}
-
-					//tooltip to show data details for each element
-					//this cannot be moved to 
-					function show_details(data, i, element) {
-						d3.select(element).attr("stroke", "black");
-						var content = "<span class=\"name\">Price:</span><span class=\"value\"> $" + addCommas(data.price) + "</span><br/>";
-						content +="<span class=\"name\">Total Circulation:</span><span class=\"value\"> " + addCommas(data.volume) + "</span><br/>";
-						content +="<span class=\"name\">Date:</span><span class=\"value\"> " + data.month + "/" + data.day + "/" + data.year + "</span>";
-						tooltip.showTooltip(content, d3.event);
-					}
-
-					//tooltip to hide data details till executred
-					function hide_details(data, i, element) {
-						d3.select(element).attr("stroke", function(d) { return d3.rgb(fill_color(d.group)).darker();} );
-						tooltip.hideTooltip();
-					}
-
-					//collects display_all and display_year in an object and returns that object
-					var my_mod = {};
-					my_mod.init = function (_data) { //what is _data? .init is initializing 
-						custom_chart(_data);
-						start();
-						//console.log(my_mod);
+				//moving the data to the center
+				function move_towards_center(alpha) {
+					return function(d) {
+						d.x = d.x + (center.x - d.x) * (damper + 0.02) * alpha;
+						d.y = d.y + (center.y - d.y) * (damper + 0.02) * alpha;
 					};
-					 
-					my_mod.display_all = display_group_all; //display all charts
-					my_mod.display_year = displayPriceByYear; //display year
-					// my_mod.display_volume = displayCirculationByMonth; // display volume by year
-					my_mod.toggle_view = function(view_type) { 
-					  // console.log("view_type", view_type);
-					  if (view_type == 'year') {
-					    displayPriceByYear();
-					  }
-					  // else if (view_type == 'circulation') {
-					  //   displayCirculationByMonth();
-					  // } 
-					  else {
-					    display_group_all();
-					    }
-					  };
+				}
 
-					return my_mod;
-				})(d3, CustomTooltip); // end custom_bubble_chart //pass d3 and CustomTooltip 	
+				//II. grouping all the data by PRICE (by year)
+				function displayPriceByYear() {
+					force.gravity(layout_gravity)
+						.charge(charge)
+						.friction(0.9)
+						.on("tick", function(e) {
+							circles.each(move_towards_year(e.alpha))
+								.attr("cx", function(d) {return d.x;})
+								.attr("cy", function(d) {return d.y;});
+							});
+					force.start();
+					display_years();
+				}
+
+				//moving the PRICE data to its respective year
+				function move_towards_year(alpha) {
+					return function(d) {
+						var target = year_centers[d.year];
+						d.x = d.x + (target.x - d.x) * (damper + 0.02) * alpha * 1.1;
+						d.y = d.y + (target.y - d.y) * (damper + 0.02) * alpha * 1.1;
+					};
+				}
+				 
+				//setting up area for split years
+				function display_years() {
+					var years_x = {"2009": width / 8, "2010": (width / 8) * 2, "2011": (width / 8) * 3, "2012": (width / 8) * 4, "2013": (width / 8) * 5, "2014": (width / 8) * 6, "2015": (width / 8) * 7};
+					var years_data = d3.keys(years_x);
+					var years = vis.selectAll(".years")
+						.data(years_data);
+					years.enter().append("text")
+						.attr("class", "years")
+						.attr("x", function(d) { return years_x[d]; }  )
+						.attr("y", 40)
+						.attr("text-anchor", "middle")
+						.text(function(d) { return d;});
+				}
+				//hide till its clicked
+				function hide_years() {
+					var years = vis.selectAll(".years").remove();
+				}
+
+				//tooltip to show data details for each element
+				//this cannot be moved to 
+				function show_details(data, i, element) {
+					d3.select(element).attr("stroke", "black");
+					var content = "<span class=\"name\">Price:</span><span class=\"value\"> $" + addCommas(data.price) + "</span><br/>";
+					content +="<span class=\"name\">Total Circulation:</span><span class=\"value\"> " + addCommas(data.volume) + "</span><br/>";
+					content +="<span class=\"name\">Date:</span><span class=\"value\"> " + data.month + "/" + data.day + "/" + data.year + "</span>";
+					tooltip.showTooltip(content, d3.event);
+				}
+
+				//tooltip to hide data details till executred
+				function hide_details(data, i, element) {
+					d3.select(element).attr("stroke", function(d) { return d3.rgb(fill_color(d.group)).darker();} );
+					tooltip.hideTooltip();
+				}
+
+				//collects display_all and display_year in an object and returns that object
+				var my_mod = {};
+				my_mod.init = function (_data) { //what is _data? .init is initializing 
+					custom_chart(_data);
+					start();
+					//console.log(my_mod);
+				};
+				 
+				my_mod.display_all = display_group_all; //display all charts
+				my_mod.display_year = displayPriceByYear; //display year
+				// my_mod.display_volume = displayCirculationByMonth; // display volume by year
+				my_mod.toggle_view = function(view_type) { 
+				  // console.log("view_type", view_type);
+				  if (view_type == 'year') {
+				    displayPriceByYear();
+				  }
+				  // else if (view_type == 'circulation') {
+				  //   displayCirculationByMonth();
+				  // } 
+				  else {
+				    display_group_all();
+				    }
+				  };
+
+				return my_mod;
+			})(d3, CustomTooltip); // end custom_bubble_chart //pass d3 and CustomTooltip 	
 
 				//*********CUSTOM TOOLTIP******** ?????????????????????
 				function CustomTooltip (tooltipId, width){
