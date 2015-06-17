@@ -65,7 +65,7 @@ setInterval(function(){
 }, 500); //define interval time
 
 
-
+force.stop();
 
 	
 });	// End app.controller
