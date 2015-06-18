@@ -12,7 +12,7 @@
 				method: "GET",
 				url: "./data/bitcurve.json" // Change to: '/api/bitcoinJson'
 			}).then(function(response) {
-				// console.log('service response', response);
+				console.log('service response', response);
 				var parsedRes = response.data;
 				// console.log('parsedRes', parsedRes);
 				var resObj = {};
