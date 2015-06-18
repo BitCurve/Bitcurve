@@ -354,6 +354,9 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     if (view_type == 'difficulty') {
       displayDifficultyByYear();
     } 
+    else if (view_type == 'difYear') {
+      displayDifficultyByYear();
+    } 
     else if (view_type == 'transactions') {
       $location.path('/transactions')
     }
