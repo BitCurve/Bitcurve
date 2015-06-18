@@ -4,7 +4,7 @@
 		.service('artDashboardService', ['$http', '$q', function($http, $q) {
 //1		
 		this.getData = function() {
-			console.log("getting data");
+			// console.log("getting data");
 
 			var dfd = $q.defer();
 			//api call 
@@ -34,7 +34,7 @@
 						id: parseInt(parsedRes[key].month + parsedRes[key].day + parsedRes[key].year)
 					}
 					dataArr.push(resObj);
-				}
+				};
 				// console.log("dataArr", dataArr);
 				dfd.resolve(dataArr);
 			});
@@ -50,6 +50,11 @@
 	}]);
 
 })();
+
+
+
+
+
 
 
 
