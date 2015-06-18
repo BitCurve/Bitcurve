@@ -1,4 +1,8 @@
-var app = angular.module('bitcurve', ['ui.router']);
+var app = angular.module('bitcurve', ['ui.router', 'price.directives', 'dif.directives']);
+
+app.run(function($state, $rootScope){
+  $rootScope.$state = $state;
+});
 
 app.config(function($stateProvider, $urlRouterProvider){
 	$urlRouterProvider
@@ -26,15 +30,27 @@ app.config(function($stateProvider, $urlRouterProvider){
   })
   // ART DASHBOARD
   .state('artDashboard', {
-    url: "/artDashboard",
+    url: "/art-dashboard",
     templateUrl: "./templates/artDashboardTmpl.html",
     controller: "artDashboardCtrl"
   })
+  .state('artDashboard.price', {
+    url: "/price",
+    templateUrl: "./templates/price.html",
+    controller: "artDashboardCtrl",
+    parent: 'artDashboard'
+  })
+  .state('artDashboard.dif', {
+    url: "/dif",
+    templateUrl: "./templates/dif.html",
+    controller: "artDashboardCtrl",
+    parent: 'artDashboard'
+  })
   // ANALYTICS DASHBOARD
-  .state('analyticsDashboard', {
-    url: "/analyticsDashboard",
-    templateUrl: "./templates/analyticsDashboardTmpl.html",
-    controller: "analyticsDashboardCtrl"
+  // .state('analyticsDashboard', {
+  //   url: "/analyticsDashboard",
+  //   templateUrl: "./WhatIsBitCurve/whatIsBitcoin.html",
+  //   controller: "analyticsDashboardCtrl"
   });
   // LOGIN
   // .state('login', {

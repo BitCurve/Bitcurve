@@ -4,15 +4,17 @@ app.controller('homeCtrl', function($scope, homeService) {
 
 // LANDING PAGE D3 CHART
 //Defining the canvas parameters and an empty array nodes
-var w = 1260, 
+var w = 1500, 
     h = 500,
+    c = "d3Home",
     nodes = [],
     links = [];
 
 //Creating canvas and appending svg
-var canvas = d3.select("body").append("svg")
-    .attr("width", w)
-    .attr("height", h);
+var canvas = d3.select(".artExample").append("svg")
+    .attr("height", "100%")
+    .attr("width", "100%")
+    .attr("class", c);
 
 //Color function
 var fill = d3.scale.category20();
@@ -22,7 +24,7 @@ var force = d3.layout.force() //initiate force
     .nodes(nodes)
     .links([]) 
     .size([w, h]);
-	console.log(force);
+	// console.log(force);
 
 	//Registers the specified listener to receive events of the specified type from the force layout; pulls all the symbols together
 	force.on("tick", function(d) {
@@ -40,6 +42,10 @@ setInterval(function(){
 
   });
 
+  
+
+
+
   //Starts the simulation. Assigned only after nodes and links specified. 
   force.start();
 
@@ -56,6 +62,10 @@ setInterval(function(){
         .style("stroke-width", "1.5px")
         .call(force.drag);
 
-}, 100); //define interval time
+}, 500); //define interval time
+
+
+force.stop();
+
 	
 });	// End app.controller
