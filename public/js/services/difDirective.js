@@ -358,7 +358,7 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     //   displayCirculationByMonth();
     // } 
     else if (view_type == 'price') {
-      $location.path('/price')
+      $location.path('/price');
     }
     else {
       display_group_all();
@@ -467,7 +467,7 @@ $(document).ready(function() {
 
       } // end link
 
-    } // end return
+    }; // end return
 
   }]);  // end .directive
 
