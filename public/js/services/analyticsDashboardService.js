@@ -8,7 +8,7 @@ app.service('analyticsDashboardService', function($http, $q){
 	
 this.getBitcoinPricing = function(){
 		// $http.get('https://api.bitcoinaverage.com/history/USD/per_day_all_time_history.csv')
-		$http.get('data/bitcurve2.json')
+		$http.get('data/bitcurve.json')
 
  
 	.success(function(data){

@@ -1,12 +1,6 @@
 var app = angular.module('bitcurve');
 
-app.controller('analyticsDashboardCtrl', function($scope, analyticsDashboardService){
-
-	
-		analyticsDashboardService.getBitcoinPricing($scope).then(function(data){
-			console.log("data from ctrl", data);
-			// $scope.bitCoinData = data;
-
+app.controller('analyticsDashboardCtrl', function($scope){
 
 
 var gainOrLossChart = dc.pieChart('#gain-loss-chart');
@@ -17,35 +11,28 @@ var moveChart = dc.lineChart('#monthly-move-chart');
 var volumeChart = dc.barChart('#monthly-volume-chart');
 var yearlyBubbleChart = dc.bubbleChart('#yearly-bubble-chart');
 
- // console.log(data)
 
-
-
+d3.json('bitcurve2.json', function (data) {
     var dateFormat = d3.time.format('%m/%d/%Y');
     var numberFormat = d3.format('.2f');
 
     data.forEach(function (d) {
-    	// if(d.date){
-    
-        d.dd = dateFormat.parse(d.date)
+        d.dd = dateFormat.parse(d.date);
         d.month = d3.time.month(d.dd);
         d.high = +d.high; 
-
         d.low = +d.low;
+
         d.volume = d.totalOutputVolumeValue;
         d.MinersRevenue = d.dailyMinersRevenue;
         d.transactionsPerBlock = d.averageNumberOfTransactionsPerBlock;
         d.totalCirculation = d.totalCirculation;
-    	// }
     });
 
-
-    var bitCoin = crossfilter(data);
-
-    var all = bitCoin.groupAll();
+    var bitcurve2 = crossfilter(data);
+    var all = bitcurve2.groupAll();
 
 
-    var yearlyDimension = bitCoin.dimension(function (d) {
+    var yearlyDimension = bitcurve2.dimension(function (d) {
         return d3.time.year(d.dd).getFullYear();
     });
   
@@ -85,12 +72,12 @@ var yearlyBubbleChart = dc.bubbleChart('#yearly-bubble-chart');
     );
 
    
-    var dateDimension = bitCoin.dimension(function (d) {
+    var dateDimension = bitcurve2.dimension(function (d) {
         return d.dd;
     });
 
 
-    var moveMonths = bitCoin.dimension(function (d) {
+    var moveMonths = bitcurve2.dimension(function (d) {
         return d.month;
     });
    
@@ -120,20 +107,20 @@ var yearlyBubbleChart = dc.bubbleChart('#yearly-bubble-chart');
     );
 
  
-    var gainOrLoss = bitCoin.dimension(function (d) {
+    var gainOrLoss = bitcurve2.dimension(function (d) {
         return d.low > d.high ? 'Loss' : 'Gain';
     });
   
     var gainOrLossGroup = gainOrLoss.group();
 
     
-    var fluctuation = bitCoin.dimension(function (d) {
+    var fluctuation = bitcurve2.dimension(function (d) {
         return Math.round((d.high - d.low) / d.low * 100);
     });
     var fluctuationGroup = fluctuation.group();
 
   
-    var quarter = bitCoin.dimension(function (d) {
+    var quarter = bitcurve2.dimension(function (d) {
         var month = d.dd.getMonth();
         if (month <= 2) {
             return 'Q1';
@@ -150,7 +137,7 @@ var yearlyBubbleChart = dc.bubbleChart('#yearly-bubble-chart');
     });
 
    
-    var dayOfWeek = bitCoin.dimension(function (d) {
+    var dayOfWeek = bitcurve2.dimension(function (d) {
         var day = d.dd.getDay();
         var name = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         return day + '.' + name[day];
@@ -337,7 +324,7 @@ var yearlyBubbleChart = dc.bubbleChart('#yearly-bubble-chart');
 
   
     dc.dataCount('.dc-data-count')
-        .dimension(bitCoin)
+        .dimension(bitcurve2)
         .group(all)
         
         .html({
