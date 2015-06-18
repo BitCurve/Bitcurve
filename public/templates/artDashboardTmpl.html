@@ -14,14 +14,14 @@
  -->
 
 <div id="view_selection">
-	<a href="#" id="transactions" ng-click="finalData(averageNumberOfTransactionsPerBlock)" class="btn active">Average Number of Transactions Per Block</a>
-	<a href="#" id="miners" ng-click="finalData(dailyMinersRevenue)" class="btn" value="dailyMinersRevenue">Daily Miners Revenue</a>
+	<a ui-sref="artDashboard.transactions" id="transactions" ng-click="finalData(averageNumberOfTransactionsPerBlock)" class="btn active">Average Number of Transactions Per Block</a>
+	<a ui-sref="artDashboard.miners" id="miners" ng-click="finalData(dailyMinersRevenue)" class="btn" value="dailyMinersRevenue">Daily Miners Revenue</a>
 	<a ui-sref="artDashboard.dif" id="difficulty" class="btn">Difficulty</a>
-	<a href="#" id="addresses" class="btn">Number of Unique Bitcoin Addresses</a>
+	<a ui-sref="artDashboard.addresses" id="addresses" class="btn">Number of Unique Bitcoin Addresses</a>
 	<a ui-sref="artDashboard.price" id="price" class="btn">Price</a>
-	<a href="#" id="circulation" class="btn">Total Circulation</a>
-	<a href="#" id="outputValue" class="btn">Total Output Volume Value</a>
-	<a href="#" id="fees" class="btn">Total Transaction Fees</a>
+	<a ui-sref="artDashboard.circulation" id="circulation" class="btn">Total Circulation</a>
+	<a ui-sref="artDashboard.output-value" id="outputValue" class="btn">Total Output Volume Value</a>
+	<a ui-sref="artDashboard.fees" id="fees" class="btn">Total Transaction Fees</a>
 </div> 
 
 
