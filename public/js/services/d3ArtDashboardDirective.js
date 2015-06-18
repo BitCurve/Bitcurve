@@ -155,7 +155,7 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     nodes.sort(function(a, b) {return b.value - a.value; }); 
     
     //create svg at #vis and then create circle representation for each node
-    vis = d3.select("#vis").append("svg") //this "#vis" is in index
+    vis = d3.select(element[0]).append("svg") //this "#vis" is in index
                 .attr("width", width)
                 .attr("height", height)
                 .attr("id", "svg_vis"); 
