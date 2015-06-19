@@ -84,12 +84,11 @@ app.config(function($stateProvider, $urlRouterProvider){
       parent: 'artDashboard'
     })
   // ANALYTICS DASHBOARD
->>>>>>> 9793d42b26ceffd9af7c74a0f716d8ef64db49d2
-  .state('analyticsDashboard', {
-    url: "/analyticsDashboard",
-    templateUrl: "./WhatIsBitCurve/whatIsBitcoin.html",
-    controller: "analyticsDashboardCtrl"
-  });
+  // .state('analyticsDashboard', {
+  //   url: "/analyticsDashboard",
+  //   templateUrl: "./whatisbitcurve/whatisbitcoin.html",
+  //   controller: "analyticsDashboardCtrl"
+  // });
   // LOGIN
   // .state('login', {
   //   url: "/login",
