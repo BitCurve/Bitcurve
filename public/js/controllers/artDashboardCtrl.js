@@ -5,7 +5,7 @@
 
 			$scope.$on('dataChange', function(event, data){
 				$scope.getData([data]);
-			})
+			});
 
 			var averageNumberOfTransactionsPerBlock = [];
 			var transactionsObj = {};
@@ -40,56 +40,56 @@
 							data: res.averageNumberOfTransactionsPerBlock,
 							year: res.year,
 							id: res.id
-						}
+						};
 						averageNumberOfTransactionsPerBlock.push(transactionsObj);
 
 						minersObj = {
 							data: res.dailyMinersRevenue,
 							year: res.year,
 							id: res.id
-						}
+						};
 						dailyMinersRevenue.push(minersObj);
 
 						difficultyObj = {
 							data: res.difficulty,
 							year: res.year,
 							id: res.id
-						}
+						};
 						difficulty.push(difficultyObj);
 
 						addressesObj = {
 							data: res.numberofUniqueBitcoinAddresses,
 							year: res.year,
 							id: res.id
-						}
+						};
 						numberofUniqueBitcoinAddresses.push(addressesObj);
 
 						priceObj = {
 							data: res.price,
 							year: res.year,
 							id: res.id
-						}
+						};
 						price.push(priceObj);
 
 						circulationObj = {
 							data: res.totalCirculation,
 							year: res.year,
 							id: res.id
-						}
+						};
 						totalCirculation.push(circulationObj);
 
 						outputObj = {
 							data: res.totalOutputVolumeValue,
 							year: res.year,
 							id: res.id
-						}
+						};
 						totalOutputVolumeValue.push(outputObj);
 
 						feesObj = {
 							data: res.totalTransactionFees,
 							year: res.year,
 							id: res.id
-						}
+						};
 						totalTransactionFees.push(feesObj);
 					});
 					// console.log('averageNumberOfTransactionsPerBlock', averageNumberOfTransactionsPerBlock);
@@ -150,11 +150,9 @@
 					// console.log('totalTransactionFees', totalTransactionFees)
 					$scope.selectedData = totalTransactionFees;
 				}
-				// console.log("root", $rootScope);
 				// console.log("selData", $scope.selectedData);
 				$rootScope.$broadcast('dataChange');
 			}	// End $scope.finalData
-		$scope.test = "testing this out";
 
 		}])//end controller
 

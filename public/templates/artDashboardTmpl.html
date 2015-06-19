@@ -1,19 +1,46 @@
-<!-- header is included already in the index.html -->
-<!-- write some html for the side radio buttons -->
+<h1>Blockchain Data Visulization</h1>
 
-<form name="dataChoices">
-	<label><input type="radio" ng-model="data.type" value="averageNumberOfTransactionsPerBlock">Average Number of Transactions Per Block</label>
-	<label><input type="radio" ng-model="data.type" value="dailyMinersRevenue">Daily Miners Revenue</label>
-	<label><input type="radio" ng-model="data.type" value="difficulty">Difficulty</label>
-	<label><input type="radio" ng-model="data.type" value="numberofUniqueBitcoinAddresses">Number of Unique Bitcoin Addresses</label>
-	<label><input type="radio" ng-model="data.type" value="price">Price</label>
-	<label><input type="radio" ng-model="data.type" value="totalCirculation">Total Circulation</label>
-	<label><input type="radio" ng-model="data.type" value="totalOutputVolumeValue">Total Output Volume Value</label>
-	<label><input type="radio" ng-model="data.type" value="totalTransactionFees">Total Transaction Fees</label>
+<!-- <form name="dataChoices" id="view_selection">
+	<label><input type="radio" id="transactions" ng-model="data.type" value="averageNumberOfTransactionsPerBlock">Average Number of Transactions Per Block</label>
+	<label><input type="radio" id="miners" ng-model="data.type" value="dailyMinersRevenue">Daily Miners Revenue</label>
+	<label><input type="radio" id="difficulty" ng-model="data.type" value="difficulty">Difficulty</label>
+	<label><input type="radio" id="addresses" ng-model="data.type" value="numberofUniqueBitcoinAddresses">Number of Unique Bitcoin Addresses</label>
+	<label><input type="radio" id="pricing" ng-model="data.type" value="price">Price</label>
+	<label><input type="radio" id="circulation" ng-model="data.type" value="totalCirculation">Total Circulation</label>
+	<label><input type="radio" id="output-value" ng-model="data.type" value="totalOutputVolumeValue">Total Output Volume Value</label>
+	<label><input type="radio" id="fees" ng-model="data.type" value="totalTransactionFees">Total Transaction Fees</label>
+<button id="data-button" ng-click="finalData(data)">Generate</button>
 </form>
-<button ng-click="finalData(data)">Generate</button>
+ -->
+
+<div id="view_selection">
+	<a ui-sref="artDashboard.transactions" id="transactions" ng-click="finalData(averageNumberOfTransactionsPerBlock)" class="btn active">Average Number of Transactions Per Block</a>
+	<a ui-sref="artDashboard.miners" id="miners" ng-click="finalData(dailyMinersRevenue)" class="btn" value="dailyMinersRevenue">Daily Miners Revenue</a>
+	<a ui-sref="artDashboard.dif" id="difficulty" class="btn">Difficulty</a>
+	<a ui-sref="artDashboard.addresses" id="addresses" class="btn">Number of Unique Bitcoin Addresses</a>
+	<a ui-sref="artDashboard.price" id="price" class="btn">Price</a>
+	<a ui-sref="artDashboard.circulation" id="circulation" class="btn">Total Circulation</a>
+	<a ui-sref="artDashboard.output-value" id="outputValue" class="btn">Total Output Volume Value</a>
+	<a ui-sref="artDashboard.fees" id="fees" class="btn">Total Transaction Fees</a>
+</div> 
 
 
-<div id="vis"></div>
+<div ui-view></div>
 
-<div bitcoin-data selected-data="selectedData" test='test'></div>
+
+
+
+<!-- <script>window.jQuery || document.write('<script src="./js/libs/jquery-1.6.2.min.js"><\/script>')</script> -->
+<!-- <script>
+	$(document).ready(function() {
+		$('#view_selection input').click(function() { //bind it to html element with class #view_selection
+			console.log("YESSSS");
+			var view_type = $(this).attr('id');
+			console.log('viewType', view_type);
+			// $('#view_selection input').removeClass('active');
+			// $(this).toggleClass('active');
+			custom_bubble_chart.toggle_view(view_type);
+			return false;
+		});
+	});
+</script> -->
