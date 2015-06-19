@@ -2,7 +2,7 @@
 
 	angular.module('price.directives', [])
 
-	.directive('priceData', [function (){  
+	.directive('priceData', [function ($location){  
 		return {
 			scope: {
 				selectedData: '='
@@ -352,12 +352,33 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
   my_mod.display_year = displayPriceByYear; //display year
   // my_mod.display_volume = displayCirculationByMonth; // display volume by year
   my_mod.toggle_view = function(view_type) { 
-    if (view_type == 'year') {
+    if (view_type == 'price') {
       displayPriceByYear();
     } 
-    // else if (view_type == 'circulation') {
-    //   displayCirculationByMonth();
-    // } 
+    else if (view_type == 'priceYear') {
+      displayPriceByYear();
+    } 
+    else if (view_type == 'transactions') {
+      $location.path('/transactions')
+    }
+    else if (view_type == 'miners') {
+      $location.path('/miners')
+    }
+    else if (view_type == 'addresses') {
+      $location.path('/addresses')
+    }
+    else if (view_type == 'difficulty') {
+      $location.path('/difficulty')
+    }
+    else if (view_type == 'circulation') {
+      $location.path('/circulation')
+    }
+    else if (view_type == 'outputValue') {
+      $location.path('/outputValue')
+    }
+    else if (view_type == 'fees') {
+      $location.path('/fees')
+    }
     else {
       display_group_all();
       }
