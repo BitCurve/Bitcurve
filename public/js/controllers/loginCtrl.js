@@ -1,7 +1,7 @@
 var app = angular.module('bitcurve');
 
 
-app.controller('loginCtrl', function($scope, $http, $window, $rootScope){
+app.controller('loginCtrl', function($scope, $http, $window, $rootScope, $location){
 	$scope.loggedIn = !!$window.sessionStorage.token;
 	$scope.message = '';
 	$scope.logout = function(){
@@ -19,13 +19,11 @@ app.controller('loginCtrl', function($scope, $http, $window, $rootScope){
 		}).success(function(data, status, headers, config){
 			$window.sessionStorage.token = data.token;
         	$scope.loggedIn = true;
-        	$location.path('/analyticsDashboard')
-        	console.log("success")
+        	$location.path('/art-dashboard')
 		}).error(function(data, status, headers, config){
 			$scope.message = "Error: Invalid username or password";
 			delete $window.sessionStorage.token;
 			$scope.loggedIn = false;
-			console.log("failure")
 		})
 	};
 });

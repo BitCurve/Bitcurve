@@ -169,10 +169,6 @@ app.get ('/api/bitcoinJson', function(req, res){
 	});
 });
 
-app.get('*', function(req, res) {
-    res.sendfile('./public/index.html'); // load our public/index.html file
-});
-
 // Connections
 var port = 8081;
 

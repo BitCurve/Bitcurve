@@ -1,11 +1,36 @@
-(function() {
+// (function() {
+
+
+// 	angular.module('bitcurve')
+
+// 	.controller('artDashboardControl', ['$scope','artDashboardService', function($scope, artDashboardService){
+
+// 		// $scope.$on('reportChange', function(event, data){
+// 		// 	$scope.changeDisplay([data])
+// 		// });
+// //2
+// 		$scope.getData = function() {
+// 			artDashboardService.getData().then(function(response) {
+// 				response.map()
+// 				//map through response data and populate various arrays
+
+// 					//price = []
+// 					//minersRevenue = []
+// 					//difficulties = []
+// 					//volume = []
+// 					//transactionFees = []
+// 			});
+// 			//based on the radio selection, the corresponding data type will populate $scope.finalData
+// 		};
+
+// 		$scope.finalData = ....
 
 	angular.module('bitcurve')
 		.controller('artDashboardCtrl', ['$scope','artDashboardService', '$rootScope', function($scope, artDashboardService, $rootScope){
 
 			$scope.$on('dataChange', function(event, data){
 				$scope.getData([data]);
-			})
+			});
 
 			var averageNumberOfTransactionsPerBlock = [];
 			var transactionsObj = {};
@@ -29,6 +54,7 @@
 			var year = [];
 			var id = [];
 
+
 			// $scope.$on('dataChange', function(event, data){
 			// 	$scope.changeDisplay([data])
 			// });
@@ -40,56 +66,76 @@
 							data: res.averageNumberOfTransactionsPerBlock,
 							year: res.year,
 							id: res.id
-						}
+						};
 						averageNumberOfTransactionsPerBlock.push(transactionsObj);
 
 						minersObj = {
 							data: res.dailyMinersRevenue,
 							year: res.year,
 							id: res.id
-						}
+						};
 						dailyMinersRevenue.push(minersObj);
+
+// 	}])//end
+
+// 	.service('artDashboardService', ['$http', '$q', function($http, $q) {
+// //1
+
+// 			this.getData: function() {
+// 				console.log("getting data");
+// 				var deferred = $q.defer();
+// 				//api call 
+// 				//manipulate data object to set up for further manipulation in controller
 
 						difficultyObj = {
 							data: res.difficulty,
 							year: res.year,
 							id: res.id
-						}
+						};
 						difficulty.push(difficultyObj);
 
 						addressesObj = {
 							data: res.numberofUniqueBitcoinAddresses,
 							year: res.year,
 							id: res.id
-						}
+						};
 						numberofUniqueBitcoinAddresses.push(addressesObj);
 
 						priceObj = {
 							data: res.price,
 							year: res.year,
 							id: res.id
-						}
+						};
 						price.push(priceObj);
+
 
 						circulationObj = {
 							data: res.totalCirculation,
 							year: res.year,
 							id: res.id
-						}
+						};
 						totalCirculation.push(circulationObj);
+
+// 					deferred.resolve(data)
+// 				return deferred.promise
+// 			};
+// 		};
+// 	}]);
+
+// ;
 
 						outputObj = {
 							data: res.totalOutputVolumeValue,
 							year: res.year,
 							id: res.id
-						}
+						};
 						totalOutputVolumeValue.push(outputObj);
 
 						feesObj = {
 							data: res.totalTransactionFees,
 							year: res.year,
 							id: res.id
-						}
+						};
 						totalTransactionFees.push(feesObj);
 					});
 					// console.log('averageNumberOfTransactionsPerBlock', averageNumberOfTransactionsPerBlock);
@@ -156,4 +202,5 @@
 
 		}])//end controller
 
-})();
+
+// })();
