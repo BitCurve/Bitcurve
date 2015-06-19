@@ -1,3 +1,6 @@
+
+
+
 (function() {
 
 	angular.module('dif.directives', [])
@@ -20,6 +23,8 @@
           "use strict";
          
         //defining the parameters for custom_bubble_chart
+
+
           var width = 1900, //width
               height = 600, //height
               tooltip = new CustomTooltip("bitcurve_tooltip", 240), //tooltip
