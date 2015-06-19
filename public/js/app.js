@@ -34,6 +34,7 @@ app.config(function($stateProvider, $urlRouterProvider){
     templateUrl: "./templates/artDashboardTmpl.html",
     controller: "artDashboardCtrl"
   })
+<<<<<<< HEAD
 
   .state('artDashboard.price', {
     url: "/price",
@@ -48,6 +49,8 @@ app.config(function($stateProvider, $urlRouterProvider){
     parent: 'artDashboard'
   })
 
+=======
+>>>>>>> 6bc21abcd0e96260a8fd274b02cb1fa3fa112627
     // ART DASHBOARD CHILDREN
     .state('artDashboard.transactions', {
       url: "/transactions",
