@@ -27,6 +27,7 @@
     "fs": "0.0.2",
     "jsonwebtoken": "^5.0.2",
     "mongoose": "^4.0.5",
+    "mongoose-file": "0.0.2",
     "morgan": "^1.6.0",
     "passport": "^0.2.2",
     "passport-coinbase": "^0.1.2",

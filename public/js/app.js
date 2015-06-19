@@ -84,11 +84,11 @@ app.config(function($stateProvider, $urlRouterProvider){
       parent: 'artDashboard'
     })
   // ANALYTICS DASHBOARD
-  // .state('analyticsDashboard', {
-  //   url: "/analyticsDashboard",
-  //   templateUrl: "./whatisbitcurve/whatisbitcoin.html",
-  //   controller: "analyticsDashboardCtrl"
-  // });
+  .state('analyticsDashboard', {
+    url: "/analyticsDashboard",
+    templateUrl: "./WhatIsBitcurve/whatIsBitcoin.html",
+    controller: "analyticsDashboardCtrl"
+  });
   // LOGIN
   // .state('login', {
   //   url: "/login",

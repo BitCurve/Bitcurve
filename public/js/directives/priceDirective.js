@@ -280,32 +280,32 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
   my_mod.display_year = displayPriceByYear; //display year
   // my_mod.display_volume = displayCirculationByMonth; // display volume by year
   my_mod.toggle_view = function(view_type) { 
-    if (view_type == 'price') {
+    if (view_type === 'price') {
       displayPriceByYear();
     } 
     else if (view_type === 'priceYear') {
       displayPriceByYear();
     } 
     else if (view_type === 'transactions') {
-      $location.path('/transactions');
+      $location.path('/transactions')
     }
     else if (view_type === 'miners') {
-      $location.path('/miners');
+      $location.path('/miners')
     }
     else if (view_type === 'addresses') {
-      $location.path('/addresses');
+      $location.path('/addresses')
     }
     else if (view_type === 'difficulty') {
-      $location.path('/difficulty');
+      $location.path('/difficulty')
     }
     else if (view_type === 'circulation') {
-      $location.path('/circulation');
+      $location.path('/circulation')
     }
     else if (view_type === 'outputValue') {
-      $location.path('/outputValue');
+      $location.path('/outputValue')
     }
     else if (view_type === 'fees') {
-      $location.path('/fees');
+      $location.path('/fees')
     }
     else {
       display_group_all();
@@ -318,7 +318,7 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
 //*********CUSTOM TOOLTIP******** 
 function CustomTooltip(tooltipId, width){
   var tooltipId = tooltipId;
-  $("body").append("<div class='tooltip' id='"+tooltipId+"'></div>");
+  $("#priceVis").append("<div class='tooltip' id='"+tooltipId+"'></div>");
   
   if(width){
     $("#"+tooltipId).css("w-th", width);
