@@ -24,8 +24,8 @@ app.config(function($stateProvider, $urlRouterProvider){
   })
   // WHAT IS BITCOIN
   .state('whatIsBitcoin', {
-    url: "/whatIsBitcoin",
-    templateUrl: "./templates/whatIsBitcoinTmpl.html",
+    url: "/whatisbitcoin",
+    templateUrl: "./templates/whatIsBitcoin.html",
     controller: "whatIsBitcoinCtrl"
   })
   // ART DASHBOARD
