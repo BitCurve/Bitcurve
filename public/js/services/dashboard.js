@@ -8,7 +8,11 @@
 // var yearlyBubbleChart = dc.bubbleChart('#yearly-bubble-chart');
 
 
+
+// d3.json('bitcurve.json', function (data) {
+
 // d3.json('../data/bitcurve.json', function (data) {
+
 //     var dateFormat = d3.time.format('%m/%d/%Y');
 //     var numberFormat = d3.format('.2f');
 

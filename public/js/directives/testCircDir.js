@@ -202,12 +202,7 @@
 							.transition()
 							.attr("x", function(d) { return x(d.x); })
 							.attr("width", x.rangeBand());
-<<<<<<< HEAD
-
-					};
-=======
 					}
->>>>>>> 6bc21abcd0e96260a8fd274b02cb1fa3fa112627
 
 					// Inspired by Lee Byron's test data generator.
 
@@ -294,7 +289,7 @@
 
       } // end link
 
-    }; // end return
+    } // end return
 
   }]);  // end .directive
 

@@ -1,7 +1,3 @@
-var app = angular.module('bitcurve');
-
-app.controller('analyticsDashboardCtrl', function($scope){
-
 
 var gainOrLossChart = dc.pieChart('#gain-loss-chart');
 var fluctuationChart = dc.barChart('#fluctuation-chart');
@@ -377,8 +373,3 @@ d3.json('bitcurve2.json', function (data) {
 
 
 d3.selectAll('#version').text(dc.version);
-
-
-
-
-});
