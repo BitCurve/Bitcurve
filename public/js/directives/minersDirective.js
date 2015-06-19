@@ -18,17 +18,13 @@
 
 // *********** BEGIN D3 ***********
 
-
-
-
-
-
+//http://bl.ocks.org/timelyportfolio/5c136de85de1c2abb6fc
 
 
       } // end link
 
-    } // end return
+    }; // end return
 
-  }]);  // end .directive
+  }]); // end .directive
 
 })(); // end iffy
