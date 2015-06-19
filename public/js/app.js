@@ -88,14 +88,19 @@ app.config(function($stateProvider, $urlRouterProvider){
     url: "/analyticsDashboard",
     templateUrl: "./WhatIsBitCurve/whatIsBitcoin.html",
     controller: "analyticsDashboardCtrl"
-  });
+  })
   // LOGIN
-  // .state('login', {
-  //   url: "/login",
-  //   templateUrl: "../templates/loginTmpl.html",
-  //   controller: "loginCtrl"
-  // })
-
+  .state('login', {
+    url: "/login",
+    templateUrl: "./templates/loginTmpl.html",
+    controller: "loginCtrl"
+  })
+  // REGISTER
+  .state('createAccount', {
+    url: "/register",
+    templateUrl: "./templates/createAccountTmpl.html",
+    controller: "createAccountCtrl"
+  })
 
 
 }); // End app.config

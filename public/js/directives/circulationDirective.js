@@ -10,7 +10,6 @@
 			restrict: "A",
 			// templateUrl: "../templates/dif.html",
 			link: function(scope, element, attrs) {
-
 				scope.$watch('selectedData', function(){
 					var data = scope.selectedData;
 				});	// end scope.$watch
@@ -370,11 +369,9 @@
         });
       });
 
-
-
       } // end link
 
-    } // end return
+    }; // end return
 
   }]);  // end .directive
 

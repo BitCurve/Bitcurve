@@ -375,11 +375,9 @@
         });
       });
 
-
-
       } // end link
 
-    } // end return
+    }; // end return
 
   }]);  // end .directive
 
