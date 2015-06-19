@@ -39,7 +39,7 @@ p {
 	fill: #aaa;
 }
 
-.tooltip {
+ui-view .tooltip {
 	position: absolute;
 	top: 100px;
 	left: 100px;
