@@ -1,0 +1,28 @@
+/*#yearly-bubble-chart {
+	margin-left: 450px;
+	margin-right: 450px;
+	margin-bottom: 200px;
+}*/
+/*.coinbase-button {
+	margin-left: 450px;
+}*/
+
+.row {
+	margin: 20%;
+
+
+}
+.jpegPic {
+	margin-top: 20px;
+	margin-left: 20%;
+	margin-right: 20%;
+}
+button {
+	float: right;
+}
+.coinbase-button {
+	float: right;
+}
+h1 {
+	margin-left: 20%
+}

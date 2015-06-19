@@ -1,8 +1,8 @@
-var app = angular.module('bitcurve', ['ui.router', 'bitcurve.directives']);
+var app = angular.module('bitcurve', ['ui.router', 'price.directives', 'dif.directives']);
 
 app.run(function($state, $rootScope){
   $rootScope.$state = $state;
-})
+});
 
 app.config(function($stateProvider, $urlRouterProvider){
 	$urlRouterProvider
@@ -34,10 +34,21 @@ app.config(function($stateProvider, $urlRouterProvider){
     templateUrl: "./templates/artDashboardTmpl.html",
     controller: "artDashboardCtrl"
   })
-  // ANALYTICS DASHBOARD
+  .state('artDashboard.price', {
+    url: "/price",
+    templateUrl: "./templates/price.html",
+    controller: "artDashboardCtrl",
+    parent: 'artDashboard'
+  })
+  .state('artDashboard.dif', {
+    url: "/dif",
+    templateUrl: "./templates/dif.html",
+    controller: "artDashboardCtrl",
+    parent: 'artDashboard'
+  })
   .state('analyticsDashboard', {
     url: "/analyticsDashboard",
-    templateUrl: "./templates/analyticsDashboardTmpl.html",
+    templateUrl: "./WhatIsBitCurve/whatIsBitcoin.html",
     controller: "analyticsDashboardCtrl"
   });
   // LOGIN
@@ -46,5 +57,7 @@ app.config(function($stateProvider, $urlRouterProvider){
   //   templateUrl: "../templates/loginTmpl.html",
   //   controller: "loginCtrl"
   // })
+
+
 
 }); // End app.config
