@@ -34,7 +34,7 @@ app.config(function($stateProvider, $urlRouterProvider){
     templateUrl: "./templates/artDashboardTmpl.html",
     controller: "artDashboardCtrl"
   })
-<<<<<<< HEAD
+
 
   .state('artDashboard.price', {
     url: "/price",
@@ -49,8 +49,6 @@ app.config(function($stateProvider, $urlRouterProvider){
     parent: 'artDashboard'
   })
 
-=======
->>>>>>> 6bc21abcd0e96260a8fd274b02cb1fa3fa112627
     // ART DASHBOARD CHILDREN
     .state('artDashboard.transactions', {
       url: "/transactions",
@@ -101,7 +99,6 @@ app.config(function($stateProvider, $urlRouterProvider){
       parent: 'artDashboard'
     })
   // ANALYTICS DASHBOARD
->>>>>>> 9793d42b26ceffd9af7c74a0f716d8ef64db49d2
   .state('analyticsDashboard', {
     url: "/analyticsDashboard",
     templateUrl: "./WhatIsBitCurve/whatIsBitcoin.html",
