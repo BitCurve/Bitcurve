@@ -52,7 +52,7 @@
 })();
 
 
-<<<<<<< HEAD
+
 // //to instantiate D3
 // var custom_bubble_chart = (function(d3, CustomTooltip) {
 //   "use strict";
@@ -444,12 +444,6 @@
 //     return false;
 //   });
 // });
-=======
 
-
-
-
-
->>>>>>> 731f64c0c4a384a825b3d09a64ee2ca2e770157e
 
 

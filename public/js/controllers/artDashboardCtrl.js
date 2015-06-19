@@ -1,6 +1,6 @@
 // (function() {
 
-<<<<<<< HEAD
+
 // 	angular.module('bitcurve')
 
 // 	.controller('artDashboardControl', ['$scope','artDashboardService', function($scope, artDashboardService){
@@ -24,7 +24,7 @@
 // 		};
 
 // 		$scope.finalData = ....
-=======
+
 	angular.module('bitcurve')
 		.controller('artDashboardCtrl', ['$scope','artDashboardService', '$rootScope', function($scope, artDashboardService, $rootScope){
 
@@ -53,7 +53,7 @@
 			var feesObj = {};
 			var year = [];
 			var id = [];
->>>>>>> 731f64c0c4a384a825b3d09a64ee2ca2e770157e
+
 
 			// $scope.$on('dataChange', function(event, data){
 			// 	$scope.changeDisplay([data])
@@ -76,7 +76,6 @@
 						};
 						dailyMinersRevenue.push(minersObj);
 
-<<<<<<< HEAD
 // 	}])//end
 
 // 	.service('artDashboardService', ['$http', '$q', function($http, $q) {
@@ -87,7 +86,7 @@
 // 				var deferred = $q.defer();
 // 				//api call 
 // 				//manipulate data object to set up for further manipulation in controller
-=======
+
 						difficultyObj = {
 							data: res.difficulty,
 							year: res.year,
@@ -108,7 +107,7 @@
 							id: res.id
 						};
 						price.push(priceObj);
->>>>>>> 731f64c0c4a384a825b3d09a64ee2ca2e770157e
+
 
 						circulationObj = {
 							data: res.totalCirculation,
@@ -117,7 +116,6 @@
 						};
 						totalCirculation.push(circulationObj);
 
-<<<<<<< HEAD
 // 					deferred.resolve(data)
 // 				return deferred.promise
 // 			};
@@ -125,7 +123,7 @@
 // 	}]);
 
 // ;
-=======
+
 						outputObj = {
 							data: res.totalOutputVolumeValue,
 							year: res.year,
@@ -203,6 +201,6 @@
 			}	// End $scope.finalData
 
 		}])//end controller
->>>>>>> 731f64c0c4a384a825b3d09a64ee2ca2e770157e
+
 
 // })();
