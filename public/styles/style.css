@@ -241,6 +241,44 @@ p {
 	margin-bottom: 50px !important;
 }
 
+/* LOGIN/REGISTER */
+.loginRegisterContainer {
+	width: 40vw;
+	min-width: 350px;
+	background-color: #4795D1;
+	color: #FFFFFF;
+	border: 3px solid #F3A734;
+	border-radius: 10px;
+	padding: 1vw;
+	margin: 12vw auto;
+	font-family: 'Circular Reg';
+}
+
+.loginRegisterContainer input {
+	width: 97%;
+}
+
+.registerLink {
+	color: #FFFFFF;
+	float: right;
+	margin: 1vw;
+}
+
+.registerLink:hover{
+	color: #000000;
+	text-decoration: none;
+}
+
+.registerCancel {
+	color: #FFFFFF;
+	margin: 1vw;
+}
+
+.registerCancel:hover{
+	color: #000000;
+	text-decoration: none;
+}
+
 
 /* FOOTER */
 .footer {

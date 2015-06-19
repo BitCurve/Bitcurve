@@ -39,11 +39,11 @@ app.config(function($stateProvider, $urlRouterProvider){
     url: "/analyticsDashboard",
     templateUrl: "./templates/analyticsDashboardTmpl.html",
     controller: "analyticsDashboardCtrl"
-  });
+  })
   // LOGIN
   // .state('login', {
   //   url: "/login",
-  //   templateUrl: "../templates/loginTmpl.html",
+  //   templateUrl: "./templates/loginTmpl.html",
   //   controller: "loginCtrl"
   // })
 

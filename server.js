@@ -3,6 +3,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var mongoose = require('mongoose');
+var filePluginLib = require('mongoose-file');
 var bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 var morgan = require('morgan');
@@ -26,34 +27,14 @@ var User = require('./models/User');
 var app = express();
 
 // Middleware
-// var coinbaseId = 
-// var coinbaseSecret = 
-// console.log("secret", coinbaseSecret);
 var file = './tmp/bitcurve.json';
-// passport.serializeUser(function(user, done) {
-//   	done(null, user);
-// });
-// passport.deserializeUser(function(obj, done) {
-//   	done(null, obj);
-// });
-//coinbase oauth
-// passport.use(new CoinbaseStrategy({
-// 	clientID: "",
-// 	clientSecret: "",
-// 	callbackURL: "",
-// 	scope: ["user"]
-// 	},
-// 	function(accessToken, refreshToken, profile, done){
-// 		process.nextTick(function(){
-// 			return done(null, profile);
-// 		});
-// 	}
-// ));
+// var filePlugin = filePluginLib.filePlugin;
+// var make_upload_to_model = filePluginLib.make_upload_to_model;
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cors());
-apiRoutes.use(function(req, res, next){
+apiRoutes.use(function(req, res, next){ //use to disable feature when not logged in
 	var token = req.body.token || req.params.token;
 	if (token) {
 		jwt.verify(token, secret, function(err, decoded) {      
@@ -66,14 +47,8 @@ apiRoutes.use(function(req, res, next){
     	});
     };
 });
-// app.use(passport.initialize());
-// app.use(passport.session());
-// function ensureAuthenticated(req, res, next) {
-//   	if (req.isAuthenticated()) { return next(); }
-//   	res.redirect('/login')
-// };
 
-
+// Endpoints
 // Gives current exchange rate data
 var job = new CronJob ('00 */01 * * * *', function(){
 	request('https://api.coindesk.com/v1/bpi/currentprice.json', function (error, response, body) {
@@ -133,17 +108,19 @@ var blockjob = new CronJob ('00 00 09 * * *', function(){
 }, true);
 blockjob.start(); //will add data to database once a day at 9am
 
-// Endpoints
-app.post('/user', function(req, res){
+//POST registration information
+app.post('/api/createAccount', function(req, res){
 	var newUser = new User(req.body);
 	newUser.password = newUser.generateHash(newUser.password);
 	newUser.save(function(err, result){
 		if (err) {return res.status(500).send(err);}
     	res.send(result);
 	});
+
 });
 
-app.post('/login', function(req, res){
+//login endpoint
+app.post('/api/login', function(req, res){
 	User.findOne({
 		username: req.body.username
 	}, function(err, user){
@@ -170,6 +147,13 @@ app.post('/login', function(req, res){
 	});
 });
 
+// app.post ('/api/postImage', function(req, res){
+// 	fs.writeFile(newImageLocation, data, 'base64', function (err) {
+//         if (err) throw err
+//         console.log('File saved.')
+//     });
+// })
+
 //Get request for the current exchange rate
 app.get ('/api/getData', function(req, res){
 	ExchangeRate.find(function(err, result){
@@ -185,24 +169,9 @@ app.get ('/api/bitcoinJson', function(req, res){
 	});
 });
 
-// app.get ('/auth/coinbase', passport.authenticate('coinbase'));
-
-// app.get('/', function(req, res){
-//   	res.render('index', { user: req.user });
-// });
-
-// app.get('/dashboard', ensureAuthenticated, function(req, res){
-//   	res.render('account', { user: req.user });
-// });
-
-// app.get('/login', function(req, res){
-//   	res.render('login', { user: req.user });
-// });
-
-// app.get('/logout', function(req, res){
-//   	req.logout();
-//   	res.redirect('/');
-// });
+app.get('*', function(req, res) {
+    res.sendfile('./public/index.html'); // load our public/index.html file
+});
 
 // Connections
 var port = 8081;
