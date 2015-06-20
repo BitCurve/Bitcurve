@@ -303,7 +303,7 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
 //*********CUSTOM TOOLTIP******** 
 function CustomTooltip(tooltipId, width){
   var tooltipId = tooltipId;
-  $("body").append("<div class='tooltip' id='"+tooltipId+"'></div>");
+  $("#priceVis").append("<div class='tooltip' id='"+tooltipId+"'></div>");
   
   if(width){
     $("#"+tooltipId).css("w-th", width);

@@ -290,7 +290,7 @@
       //*********CUSTOM TOOLTIP******** 
       function CustomTooltip(tooltipId, width){
       var tooltipId = tooltipId;
-      $("body").append("<div class='tooltip' id='"+tooltipId+"'></div>");
+      $("#addVis").append("<div class='tooltip' id='"+tooltipId+"'></div>");
 
       if(width){
       $("#"+tooltipId).css("w-th", width);
