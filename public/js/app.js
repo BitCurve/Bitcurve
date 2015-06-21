@@ -88,11 +88,7 @@ app.config(function($stateProvider, $urlRouterProvider){
     url: "/analyticsDashboard",
     templateUrl: "./WhatIsBitcurve/whatIsBitcoin.html",
     controller: "analyticsDashboardCtrl"
-<<<<<<< HEAD
   })
-=======
-  });
->>>>>>> 907280e7f4b1a711df3e4efc63e81ac92ae484e1
   // LOGIN
   // .state('login', {
   //   url: "/login",

@@ -60,7 +60,7 @@
          
         //custom chart that takes in data 
           var custom_chart = function(data) {
-            console.log("data", data);
+            // console.log("data", data);
               //use the max total_amount in the data as the max in the scale's domain
               max_price = d3.max(data, function(d) { return parseFloat(d.difficulty, 10); }); //function for the max data and parsing it into #
               // console.log("max_price", max_price);
@@ -82,7 +82,7 @@
             };
             groupLevel();
 
-            console.log("data", data);
+            // console.log("data", data);
             //create node objects from original data that will serve as the data behind each bubble in the vis, then add each node to nodes to be used later
             data.forEach(function(d){//The forEach() method executes a provided function once per array element.
 
@@ -356,7 +356,7 @@ function addCommas(nStr)
 
       //*********DATA*********
       var bitcurveData = d3.json("../../data/artDashboardData.json", function(data) {
-        console.log("listening to data", data);
+        // console.log("listening to data", data);
         custom_bubble_chart.init(data);
         custom_bubble_chart.toggle_view('all');
       });
