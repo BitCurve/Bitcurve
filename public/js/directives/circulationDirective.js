@@ -10,10 +10,7 @@
 			restrict: "A",
 			// templateUrl: "../templates/dif.html",
 			link: function(scope, element, attrs) {
-<<<<<<< HEAD
-=======
 
->>>>>>> 907280e7f4b1a711df3e4efc63e81ac92ae484e1
 				scope.$watch('selectedData', function(){
 					var data = scope.selectedData;
 				});	// end scope.$watch
@@ -501,11 +498,6 @@ d3.json("../../data/artDashboardData.json", function(error, data) {
       .attr("d", line);
 });
 
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 907280e7f4b1a711df3e4efc63e81ac92ae484e1
       } // end link
 
     }; // end return

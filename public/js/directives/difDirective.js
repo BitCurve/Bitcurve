@@ -261,25 +261,25 @@
             displayDifficultyByYear();
           } 
           else if (view_type === 'transactions') {
-            $location.path('/transactions')
+            $location.path('/transactions');
           }
           else if (view_type === 'miners') {
-            $location.path('/miners')
+            $location.path('/miners');
           }
           else if (view_type === 'addresses') {
-            $location.path('/addresses')
+            $location.path('/addresses');
           }
           else if (view_type === 'price') {
-            $location.path('/price')
+            $location.path('/price');
           }
           else if (view_type === 'circulation') {
-            $location.path('/circulation')
+            $location.path('/circulation');
           }
           else if (view_type === 'outputValue') {
-            $location.path('/outputValue')
+            $location.path('/outputValue');
           }
           else if (view_type === 'fees') {
-            $location.path('/fees')
+            $location.path('/fees');
           }
           else {
             display_group_all();
