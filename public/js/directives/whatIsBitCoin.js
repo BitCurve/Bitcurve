@@ -1,8 +1,21 @@
-var app = angular.module('bitcurve');
+(function() {
+    angular.module('graph.directive', [])
 
-app.controller('analyticsDashboardCtrl', function($scope){
+    .directive('infoGraph', [function ($scope){
+        return {
+            scope: {
+                selectedData: '='
+            },
+            restrict: "A",
 
+            link: function(scope, element, attrs) {
 
+                scope.$watch('selectedData', function(){
+                    var data = scope.selectedData;
+                });
+
+                //Starting d3 in this B
+                
 var gainOrLossChart = dc.pieChart('#gain-loss-chart');
 var fluctuationChart = dc.barChart('#fluctuation-chart');
 var quarterChart = dc.pieChart('#quarter-chart');
@@ -377,8 +390,7 @@ d3.json('bitcurve2.json', function (data) {
 
 
 d3.selectAll('#version').text(dc.version);
-
-
-
-
-});
+            }
+        }
+    }])
+})

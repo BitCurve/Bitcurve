@@ -34,6 +34,21 @@ app.config(function($stateProvider, $urlRouterProvider){
     templateUrl: "./templates/artDashboardTmpl.html",
     controller: "artDashboardCtrl"
   })
+
+
+  .state('artDashboard.price', {
+    url: "/price",
+    templateUrl: "./templates/price.html",
+    controller: "artDashboardCtrl",
+    parent: 'artDashboard'
+  })
+  .state('artDashboard.dif', {
+    url: "/dif",
+    templateUrl: "./templates/dif.html",
+    controller: "artDashboardCtrl",
+    parent: 'artDashboard'
+  })
+
     // ART DASHBOARD CHILDREN
     .state('artDashboard.miners', {
       url: "/miners",
