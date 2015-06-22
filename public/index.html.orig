@@ -22,8 +22,13 @@
 <div class="navbar">
 	<a href="/#/"><img class="miniLogo" src="images/bitcurve-logo-mini.png"></a>
 	<div class="centered-navLinks">
+<<<<<<< HEAD
+		<a href="../whatIsBitcoin.html"><p class="inline">about</p></a>
+		<a href="/#/register"><p class="inline">register</p></a>
+=======
 		<a ui-sref= "whatIsBitcoin"><p class="inline">About</p></a>
 		<a ui-sref="register"><p class="inline">Register</p></a>
+>>>>>>> 30b90f62457f263228fb898639ef8c3b4b7093b3
 	</div>
 	<ul class="navLinks">
 		<a ui-sref="login"><img class="login-cloud loginLink" src="images/cloud-log-in.png"></a>

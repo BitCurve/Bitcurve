@@ -621,7 +621,6 @@ d3.json("../../data/artDashboardData.json", function(error, data) {
       .attr("d", line);
 });
 =======
->>>>>>> 30b90f62457f263228fb898639ef8c3b4b7093b3
           return x1 + x2;
         }
 
@@ -642,6 +641,7 @@ d3.json("../../data/artDashboardData.json", function(error, data) {
             return false;
           });
         });
+>>>>>>> 92e6d02c76e18e1888d3fffc6e0765b03f476297
 
       } // end link
 

@@ -462,9 +462,15 @@ div#main {
     }
 
 }
+
 /*//DASHBOARD CONTENT*/
 .description {
 	text-align: center;
+}
+
+h3.description {
+    width: 900px;
+    margin: 0 auto;
 }
 
 .feeContainer {
@@ -474,6 +480,7 @@ div#main {
 	width: 200px;*/
 	text-align: center;
 }
+
 .axis path,
 .axis line {
   fill: none;
