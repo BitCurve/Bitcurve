@@ -1,6 +1,3 @@
-
-
-
 (function() {
 
 	angular.module('dif.directives', [])
@@ -25,7 +22,7 @@
         //defining the parameters for custom_bubble_chart
 
 
-          var width = 1900, //width
+          var width = 1600, //width
               height = 600, //height
               tooltip = new CustomTooltip("bitcurve_tooltip", 240), //tooltip
               layout_gravity = -0.01, //gravity
@@ -63,7 +60,7 @@
          
         //custom chart that takes in data 
           var custom_chart = function(data) {
-            console.log("data", data);
+            // console.log("data", data);
               //use the max total_amount in the data as the max in the scale's domain
               max_price = d3.max(data, function(d) { return parseFloat(d.difficulty, 10); }); //function for the max data and parsing it into #
               // console.log("max_price", max_price);
@@ -85,7 +82,7 @@
             };
             groupLevel();
 
-            console.log("data", data);
+            // console.log("data", data);
             //create node objects from original data that will serve as the data behind each bubble in the vis, then add each node to nodes to be used later
             data.forEach(function(d){//The forEach() method executes a provided function once per array element.
 
@@ -264,25 +261,25 @@
             displayDifficultyByYear();
           } 
           else if (view_type === 'transactions') {
-            $location.path('/transactions')
+            $location.path('/transactions');
           }
           else if (view_type === 'miners') {
-            $location.path('/miners')
+            $location.path('/miners');
           }
           else if (view_type === 'addresses') {
-            $location.path('/addresses')
+            $location.path('/addresses');
           }
           else if (view_type === 'price') {
-            $location.path('/price')
+            $location.path('/price');
           }
           else if (view_type === 'circulation') {
-            $location.path('/circulation')
+            $location.path('/circulation');
           }
           else if (view_type === 'outputValue') {
-            $location.path('/outputValue')
+            $location.path('/outputValue');
           }
           else if (view_type === 'fees') {
-            $location.path('/fees')
+            $location.path('/fees');
           }
           else {
             display_group_all();
@@ -294,72 +291,72 @@
 
       //*********CUSTOM TOOLTIP******** 
       function CustomTooltip(tooltipId, width){
-      var tooltipId = tooltipId;
-      $("body").append("<div class='tooltip' id='"+tooltipId+"'></div>");
-
-      if(width){
-      $("#"+tooltipId).css("w-th", width);
+        var tooltipId = tooltipId;
+        $("#difVis").append("<div class='tooltip' id='"+tooltipId+"'></div>");
+        
+        if(width){
+          $("#"+tooltipId).css("w-th", width);
+        }
+        
+        hideTooltip();
+        
+        function showTooltip(content, event){
+          $("#"+tooltipId).html(content);
+          $("#"+tooltipId).show();
+          
+          updatePosition(event);
+        }
+        
+        function hideTooltip(){
+          $("#"+tooltipId).hide();
+        }
+        
+        function updatePosition(event){
+          var ttid = "#"+tooltipId;
+          var xOffset = 20;
+          var yOffset = 10;
+          
+           var ttw = $(ttid).width();
+           var tth = $(ttid).height();
+           var wscrY = $(window).scrollTop();
+           var wscrX = $(window).scrollLeft();
+           var curX = (document.all) ? event.clientX + wscrX : event.pageX;
+           var curY = (document.all) ? event.clientY + wscrY : event.pageY;
+           var ttleft = ((curX - wscrX + xOffset*2 + ttw) > $(window).width()) ? curX - ttw - xOffset*2 : curX + xOffset;
+           if (ttleft < wscrX + xOffset){
+            ttleft = wscrX + xOffset;
+           } 
+           var tttop = ((curY - wscrY + yOffset*2 + tth) > $(window).height()) ? curY - tth - yOffset*2 : curY + yOffset;
+           if (tttop < wscrY + yOffset){
+            tttop = curY + yOffset;
+           } 
+           $(ttid).css('top', tttop + 'px').css('left', ttleft + 'px');
+        }
+        
+        return {
+          showTooltip: showTooltip,
+          hideTooltip: hideTooltip,
+          updatePosition: updatePosition
+        };
       }
 
-      hideTooltip();
-
-      function showTooltip(content, event){
-      $("#"+tooltipId).html(content);
-      $("#"+tooltipId).show();
-
-      updatePosition(event);
-      }
-
-      function hideTooltip(){
-      $("#"+tooltipId).hide();
-      }
-
-      function updatePosition(event){
-      var ttid = "#"+tooltipId;
-      var xOffset = 20;
-      var yOffset = 10;
-
-      var ttw = $(ttid).width();
-      var tth = $(ttid).height();
-      var wscrY = $(window).scrollTop();
-      var wscrX = $(window).scrollLeft();
-      var curX = (document.all) ? event.clientX + wscrX : event.pageX;
-      var curY = (document.all) ? event.clientY + wscrY : event.pageY;
-      var ttleft = ((curX - wscrX + xOffset*2 + ttw) > $(window).width()) ? curX - ttw - xOffset*2 : curX + xOffset;
-      if (ttleft < wscrX + xOffset){
-      ttleft = wscrX + xOffset;
-      } 
-      var tttop = ((curY - wscrY + yOffset*2 + tth) > $(window).height()) ? curY - tth - yOffset*2 : curY + yOffset;
-      if (tttop < wscrY + yOffset){
-      tttop = curY + yOffset;
-      } 
-      $(ttid).css('top', tttop + 'px').css('left', ttleft + 'px');
-      }
-
-      return {
-      showTooltip: showTooltip,
-      hideTooltip: hideTooltip,
-      updatePosition: updatePosition
-      };
-      }
-
-      //part of tooltip, adding commas
-      function addCommas(nStr)
-      {
-      nStr += '';
-      x = nStr.split('.');
-      x1 = x[0];
-      x2 = x.length > 1 ? '.' + x[1] : '';
-      var rgx = /(\d+)(\d{3})/;
-      while (rgx.test(x1)) {
-      x1 = x1.replace(rgx, '$1' + ',' + '$2');
-      }
-      return x1 + x2;
-      }
+//part of tooltip, adding commas
+function addCommas(nStr)
+{
+ nStr += '';
+ x = nStr.split('.');
+ x1 = x[0];
+ x2 = x.length > 1 ? '.' + x[1] : '';
+ var rgx = /(\d+)(\d{3})/;
+ while (rgx.test(x1)) {
+   x1 = x1.replace(rgx, '$1' + ',' + '$2');
+ }
+ return x1 + x2;
+}
 
       //*********DATA*********
       var bitcurveData = d3.json("../../data/artDashboardData.json", function(data) {
-        console.log("listening to data", data);
+        // console.log("listening to data", data);
         custom_bubble_chart.init(data);
         custom_bubble_chart.toggle_view('all');
       });
@@ -375,11 +372,9 @@
         });
       });
 
-
-
       } // end link
 
-    } // end return
+    }; // end return
 
   }]);  // end .directive
 

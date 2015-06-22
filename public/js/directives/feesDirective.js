@@ -58,7 +58,7 @@
          
         //custom chart that takes in data 
           var custom_chart = function(data) {
-            console.log("data", data);
+            // console.log("data", data);
               //use the max total_amount in the data as the max in the scale's domain
               max_fees = d3.max(data, function(d) { return parseFloat(d.totalTransactionFees, 10); }); //function for the max data and parsing it into #
               // console.log("max_fees", max_fees);
@@ -80,7 +80,7 @@
             };
             groupLevel();
 
-            console.log("data", data);
+            // console.log("data", data);
             //create node objects from original data that will serve as the data behind each bubble in the vis, then add each node to nodes to be used later
             data.forEach(function(d){//The forEach() method executes a provided function once per array element.
 
@@ -290,7 +290,7 @@
       //*********CUSTOM TOOLTIP******** 
       function CustomTooltip(tooltipId, width){
       var tooltipId = tooltipId;
-      $("body").append("<div class='tooltip' id='"+tooltipId+"'></div>");
+      $("#feesVis").append("<div class='tooltip' id='"+tooltipId+"'></div>");
 
       if(width){
       $("#"+tooltipId).css("w-th", width);
@@ -354,7 +354,7 @@
 
       //*********DATA*********
       var bitcurveData = d3.json("../../data/artDashboardData.json", function(data) {
-        console.log("listening to data", data);
+        // console.log("listening to data", data);
         custom_bubble_chart.init(data);
         custom_bubble_chart.toggle_view('all');
       });

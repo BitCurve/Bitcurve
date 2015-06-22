@@ -1,14 +1,31 @@
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+		<div id="view_selection"><br><br>
+		<h3>Blockchain Data Visualization</h3><br><br>
+			<!-- <a ui-sref="artDashboard.outputValue" id="outputValue" class="btn">Total Output Volume Value</a><br><br> -->
+			<!-- <a ui-sref="artDashboard.addresses" id="addresses" class="btn">Unique Bitcoin Addresses</a><br><br> -->
+			<!-- <a ui-sref="artDashboard.transactions" id="transactions" class="btn">Transactions Per Block</a><br><br> -->
+			<a ui-sref="artDashboard.fees" id="fees" class="btn">Total Transaction Fees</a><br><br>
+			<a ui-sref="artDashboard.miners" id="miners" class="btn">Daily Miners Revenue</a><br><br>
+			<a ui-sref="artDashboard.price" id="price" class="btn">Daily Bitcoin Price</a><br><br>
+			<a ui-sref="artDashboard.circulation" id="circulation" class="btn">Total Circulation</a><br><br>
+			<a ui-sref="artDashboard.dif" id="difficulty" class="btn">Difficulty</a><br><br>
+		</div> 
+    </div>
 
-<div id="view_selection">
-	<h1>Blockchain Data Visualization</h1>
-	<a ui-sref="artDashboard.transactions" id="transactions" class="btn active">Average Number of Transactions Per Block</a>
-	<a ui-sref="artDashboard.miners" id="miners" class="btn">Daily Miners Revenue</a>
-	<a ui-sref="artDashboard.dif" id="difficulty" class="btn">Difficulty</a>
-	<a ui-sref="artDashboard.addresses" id="addresses" class="btn">Number of Unique Bitcoin Addresses</a>
-	<a ui-sref="artDashboard.price" id="price" class="btn">Price</a>
-	<a ui-sref="artDashboard.circulation" id="circulation" class="btn">Total Circulation</a>
-	<a ui-sref="artDashboard.outputValue" id="outputValue" class="btn">Total Output Volume Value</a>
-	<a ui-sref="artDashboard.fees" id="fees" class="btn">Total Transaction Fees</a>
-</div> 
+    <div id="page-content-wrapper">
+        <div class="page-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- content of page -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 
 <div ui-view></div>
+

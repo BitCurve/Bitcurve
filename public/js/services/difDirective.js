@@ -364,7 +364,7 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
       $location.path('/addresses')
     }
     else if (view_type == 'price') {
-      $location.path('/price')
+      $location.path('/price');
     }
     else if (view_type == 'circulation') {
       $location.path('/circulation')
@@ -482,7 +482,7 @@ $(document).ready(function() {
 
       } // end link
 
-    } // end return
+    }; // end return
 
   }]);  // end .directive
 
