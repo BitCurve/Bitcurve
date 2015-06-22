@@ -317,7 +317,6 @@
           while (rgx.test(x1)) {
             x1 = x1.replace(rgx, '$1' + ',' + '$2');
           }
-<<<<<<< HEAD
         };
        
 
@@ -620,7 +619,6 @@ d3.json("../../data/artDashboardData.json", function(error, data) {
       .attr("class", "line")
       .attr("d", line);
 });
-=======
           return x1 + x2;
         }
 
@@ -641,7 +639,6 @@ d3.json("../../data/artDashboardData.json", function(error, data) {
             return false;
           });
         });
->>>>>>> 92e6d02c76e18e1888d3fffc6e0765b03f476297
 
       } // end link
 
