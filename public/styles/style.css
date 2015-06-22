@@ -467,6 +467,11 @@ div#main {
 	text-align: center;
 }
 
+h3.description {
+    width: 900px;
+    margin: 0 auto;
+}
+
 .feeContainer {
 	display: block;
 	/*margin-left: auto;
@@ -474,7 +479,7 @@ div#main {
 	width: 200px;*/
 	text-align: center;
 }
->>>>>>> e5e0c211e0b460d87d86b8acdf9846190f061d5f
+
 .axis path,
 .axis line {
   fill: none;
