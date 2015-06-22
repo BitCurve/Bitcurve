@@ -1,4 +1,4 @@
-var app = angular.module('bitcurve', ['ui.router', 'price.directives', 'dif.directives', 'circulation.directives', 'addresses.directives', 'fees.directives', 'miners.directives', 'outputValue.directives', 'transactions.directives', 'ngToast', 'ngSanitize']);
+var app = angular.module('bitcurve', ['ui.router', 'price.directives', 'dif.directives', 'circulation.directives', 'fees.directives', 'miners.directives', 'ngToast', 'ngSanitize']);
 
 app.run(function($state, $rootScope){
   $rootScope.$state = $state;
@@ -35,12 +35,6 @@ app.config(function($stateProvider, $urlRouterProvider){
     controller: "artDashboardCtrl"
   })
     // ART DASHBOARD CHILDREN
-    .state('artDashboard.transactions', {
-      url: "/transactions",
-      templateUrl: "./templates/transactions.html",
-      controller: "artDashboardCtrl",
-      parent: 'artDashboard'
-    })
     .state('artDashboard.miners', {
       url: "/miners",
       templateUrl: "./templates/miners.html",
@@ -53,12 +47,6 @@ app.config(function($stateProvider, $urlRouterProvider){
       controller: "artDashboardCtrl",
       parent: 'artDashboard'
     })
-    .state('artDashboard.addresses', {
-      url: "/addresses",
-      templateUrl: "./templates/addresses.html",
-      controller: "artDashboardCtrl",
-      parent: 'artDashboard'
-    })
     .state('artDashboard.price', {
       url: "/price",
       templateUrl: "./templates/price.html",
@@ -68,12 +56,6 @@ app.config(function($stateProvider, $urlRouterProvider){
     .state('artDashboard.circulation', {
       url: "/circulation",
       templateUrl: "./templates/circulation.html",
-      controller: "artDashboardCtrl",
-      parent: 'artDashboard'
-    })
-    .state('artDashboard.outputValue', {
-      url: "/output-value",
-      templateUrl: "./templates/output-value.html",
       controller: "artDashboardCtrl",
       parent: 'artDashboard'
     })
