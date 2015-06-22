@@ -1,8 +1,18 @@
 <div id="main" role="main">
 	<h2 class="metric-heading">Difficulty</h2>
-     <div id="view_selection" class="btn-group"><br>
+	 <h3 class="description">A chart showing difficulty changes over time. Difficulty is a measure of how difficult it is to find a new block compared to the easiest it can ever be.</h3><br>
+
+	   <div class="feeContainer">
+		   	<span class="fee dif-low">low</span>
+	       	<span class="fee dif-median">medium</span>
+	       	<span class="fee dif-high">high</span>
+       </div><br>
+
+    <div id="view_selection" class="btn-group">
 		<a href="#" id="difAll" class="btn active">All</a>
-       <a href="#" id="difYear" class="btn">Difficulty by Year</a>
-   <div id="difVis"></div>
-   <div difficulty-data selected-data="selectedData"></div>
+       	<a href="#" id="difYear" class="btn">Difficulty by Year</a>
+	   <div id="difVis"></div>
+	   <div difficulty-data selected-data="selectedData"></div>
+   </div>
+
 </div>
