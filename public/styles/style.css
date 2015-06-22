@@ -166,8 +166,11 @@ p {
 }
 
 .ng-scope {
-	width: 100%;
+	/*width: 100%;*/
 	height: auto;
+}
+div#main.ng-scope {
+	width: 100%;
 }
 
 /* HOME */
@@ -406,23 +409,24 @@ p {
 
 /*SIDEBAR*/
 /*idebar for ArtDashboard*/
-#wrapper {
+/*#wrapper {
   padding-left: 250px;
-}
+}*/
 
 #sidebar-wrapper {
-  margin-left: -250px;
-  left: 250px;
+  /*margin-left: -250px;
+  left: 250px;*/
   width: 250px;
   background: #c5ccca;
   position: fixed;
   height: 100%;
-  overflow-y: auto;
+  /*overflow-y: auto;*/
   z-index: 1000;
+  float: left;
 }
 
 #page-content-wrapper {
-  width: calc(100% -250px);
+  width: calc(100% - 250px);
 }
 
 .sidebar-nav {
@@ -433,7 +437,9 @@ p {
   margin: 0;
   padding: 0;
 }
-
+div#main {
+	float: right;
+}
 @media (max-width:767px) {
 
     #wrapper {
@@ -456,8 +462,6 @@ p {
     }
 
 }
-<<<<<<< HEAD
-
 /*//DASHBOARD CONTENT*/
 .description {
 	text-align: center;
@@ -465,32 +469,62 @@ p {
 
 .feeContainer {
 	display: block;
-	margin-left: auto;
+	/*margin-left: auto;
 	margin-right: auto;
-	width: 200px;
-=======
+	width: 200px;*/
+	text-align: center;
+}
 .axis path,
 .axis line {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
->>>>>>> 7a1c372c68a07d75b416670e4f28eba2789ba965
 }
-
-.fee-low{
-	background-color: #CC8421
-	
+.fee-low {
+	background-color: #CC8421;
 }
-
 .fee-median {
-	background-color: #FFBFE9
+	background-color: #FFBFE9;
 }
-
-.fee-high{
-	background-color: #62AFB2
+.fee-high {
+	background-color: #62AFB2;
 }
-
-
+.mine-low {
+	background-color: #FF6867;
+}
+.mine-median {
+	background-color: #5E9199;
+}
+.mine-high {
+	background-color: #37FFAB;
+}
+.circ-low {
+	background-color: #99906F;
+}
+.circ-median {
+	background-color: #30ECFF;
+}
+.circ-high {
+	background-color: #FF9000;
+}
+.dif-low {
+	background-color: #7B7399;
+}
+.dif-median {
+	background-color: #FFAA30;
+}
+.dif-high {
+	background-color: #0057FF;
+}
+.price-low {
+	background-color: #FFCEB2;
+}
+.price-median {
+	background-color: #4038FF;
+}
+.price-high {
+	background-color: #39CC18;
+}
 .fee {
 	text-align: center;
 	padding: 14px;
