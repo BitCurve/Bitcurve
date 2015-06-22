@@ -258,7 +258,6 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
   function show_details(data, i, element) {
     d3.select(element).attr("stroke", "#fff");
     var content = "<span class=\"name\">Price:</span><span class=\"value\"> $ " + addCommas(data.price) + "</span><br/>";
-    content +="<span class=\"name\">Year:</span><span class=\"value\"> " + data.year + "</span>";
     content +="<span class=\"name\">Date:</span><span class=\"value\"> " + data.month + "/" + data.day + "/" + data.year + "</span>";
     tooltip.showTooltip(content, d3.event);
   }

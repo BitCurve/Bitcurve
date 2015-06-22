@@ -20,12 +20,12 @@
           "use strict";
          
         //defining the parameters for custom_bubble_chart
-          var width = 1900, //width
-              height = 600, //height
-              tooltip = new CustomTooltip("bitcurve_tooltip", 240), //tooltip
-              layout_gravity = -0.01, //gravity
-              damper = 0.1, //moving around nodes
-              nodes = [], //empty nodes
+          var width = 1400, 
+              height = 600, 
+              tooltip = new CustomTooltip("bitcurve_tooltip", 240), 
+              layout_gravity = -0.01,
+              damper = 0.1,
+              nodes = [],
               vis, 
               force, 
               circles, 
@@ -36,10 +36,9 @@
               lowfeesRange,
               avefeesRange,
               highfeesRange;
-        //defining the center based on width and height
+
           var center = {x: width / 2, y: height / 2}; 
          
-        //defining the area for all the years when split
           var year_centers = {
               "2009": {x: (width / 8), y: height / 2},
               "2010": {x: (width / 8) * 2, y: height / 2},
@@ -53,18 +52,17 @@
         //color definition 
           var fill_color = d3.scale.ordinal()
             .domain(["low", "median", "high"])
-            .range(["#000000", "#cccccc", "#6de09d"]);
+            .range(["#CC8421", "#FFBFE9", "#62AFB2"]);
 
          
-        //custom chart that takes in data 
+        //custom chart
           var custom_chart = function(data) {
             // console.log("data", data);
-              //use the max total_amount in the data as the max in the scale's domain
-              max_fees = d3.max(data, function(d) { return parseFloat(d.totalTransactionFees, 10); }); //function for the max data and parsing it into #
+              max_fees = d3.max(data, function(d) { return parseFloat(d.totalTransactionFees, 10); });
               // console.log("max_fees", max_fees);
-              min_fees = d3.min(data, function(d) { return parseFloat(d.totalTransactionFees, 10); }); //function for the max data and parsing it into #
+              min_fees = d3.min(data, function(d) { return parseFloat(d.totalTransactionFees, 10); }); 
               // console.log("min_fees", min_fees);
-              radius_scale = d3.scale.pow().exponent(0.5) //pow.exponent takes in an exponent value
+              radius_scale = d3.scale.pow().exponent(0.5)
               .domain([0, max_fees])
               .range([2, 8]);
 
@@ -80,9 +78,8 @@
             };
             groupLevel();
 
-            // console.log("data", data);
-            //create node objects from original data that will serve as the data behind each bubble in the vis, then add each node to nodes to be used later
-            data.forEach(function(d){//The forEach() method executes a provided function once per array element.
+
+            data.forEach(function(d){
 
               // ***fees RANGE CONDITIONALS***
               if (d.totalTransactionFees >= min_fees && d.totalTransactionFees <= lowfeesRange) {
@@ -111,17 +108,16 @@
                 fees: parseFloat(d.totalTransactionFees),
                 group: d.group, 
                 radius: radius_scale(parseFloat(d.totalTransactionFees, 10)),
-                // value: d.totalTransactionFees,
-                x: Math.random() * 900, //defining x & y for the node to be placed anywhere on the canvas
+                x: Math.random() * 900, 
                 y: Math.random() * 800
               };
-            	nodes.push(node); //push node into nodes	
+            	nodes.push(node); 
             });
             
           nodes.sort(function(a, b) {return b.value - a.value; }); 
           
           //create svg at #vis and then create circle representation for each node
-          vis = d3.select("#feesVis").append("svg") //this "#vis" is in index
+          vis = d3.select("#feesVis").append("svg") 
                   .attr("width", width)
                   .attr("height", height)
                   .attr("id", "svg_vis"); 
@@ -138,10 +134,10 @@
                   .attr("stroke-width", 2)
                   .attr("stroke", function(d) {return d3.rgb(fill_color(d.group)).darker();})
                   .attr("id", function(d) { return  "bubble_" + +(d.id); })
-                  .on("mouseover", function(d, i) {show_details(d, i, this);} ) //used because we need 'this' in the mouse callbacks
+                  .on("mouseover", function(d, i) {show_details(d, i, this);} ) 
                   .on("mouseout", function(d, i) {hide_details(d, i, this);} );
+
        
-          //d3 transition; Fancy transition to make bubbles appear, ending with the correct radius
           circles.transition().duration(2000).attr("r", function(d) { return d.radius; });
           // circles.exit().remove();
        
@@ -160,13 +156,13 @@
        
       //GROUPING THE DATA 
 
-        //I. Sets up force layout to display all nodes in one circle; used to configure and startup the force directed simulation:
+        //I. Sets up force layout to display all nodes in one circle
         function display_group_all() {
-          force.gravity(layout_gravity) //force is an instance variable of BubbleChart holding the force layout for the visualization.
+          force.gravity(layout_gravity) 
                .charge(charge)
                .friction(0.9)
                .on("tick", function(e) {
-                  circles.each(move_towards_center(e.alpha)) //The circles instance variable holds the svg circles that represent each node.
+                  circles.each(move_towards_center(e.alpha)) 
                          .attr("cx", function(d) {return d.x;})
                          .attr("cy", function(d) {return d.y;});
                });
@@ -194,19 +190,16 @@
           display_years();
         }
        
-        //moving the data to its respective year; move_towards_year is almost the same as move_towards_center. The difference being that first the correct year point is extracted from @year_centers. Here’s what that variable looks like:
         function move_towards_year(alpha) {
           return function(d) {
             var target = year_centers[d.year];
-            d.x = d.x + (target.x - d.x) * (damper + 0.02) * alpha * 2.2; //move_towards_year also multiplies by 1.1 to speed up the transition a bit.
+            d.x = d.x + (target.x - d.x) * (damper + 0.02) * alpha * 2.2; 
             d.y = d.y + (target.y - d.y) * (damper + 0.02) * alpha * 1.5;
           };
         }
 
        
-        //Method to display year titles, setting up area for split years; this is just an associative array where each year has its own location to move towards.
         function display_years() {
-            // var years_x = {"2013": 160, "2014": width / 2, "2015": width - 160};
             var years_x = {"2009": width / 8, "2010": (width / 8) * 2, "2011": (width / 8) * 3,"2012": (width / 8) * 4,"2013": (width / 8) * 5,"2014": (width / 8) * 6,"2015": (width / 8) * 7};
             var years_data = d3.keys(years_x);
             var years = vis.selectAll(".years")
@@ -221,29 +214,26 @@
                          .text(function(d) { return d;});
        
         }
-       //Method to hide year titiles
+
         function hide_years() {
             var years = vis.selectAll(".years").remove();
         }
        
        //tooltip to show data details for each element
-       //this cannot be moved to 
         function show_details(data, i, element) {
           d3.select(element).attr("stroke", "#fff");
-          var content = "<span class=\"name\">fees:</span><span class=\"value\"> $" + addCommas(data.fees) + "</span><br/>";
-          // content +="<span class=\"name\">Year:</span><span class=\"value\"> " + data.year + "</span><br/>";
+          var content = "<span class=\"name\">fees:</span><span class=\"value\"> BTC" + addCommas(data.fees) + "</span><br/>";
           content +="<span class=\"name\">Date:</span><span class=\"value\"> " + data.month + "/" + data.day + "/" + data.year + "</span>";
           tooltip.showTooltip(content, d3.event);
         }
-       //tooltip to hide data details till executred
+
         function hide_details(data, i, element) {
           d3.select(element).attr("stroke", function(d) { return d3.rgb(fill_color(d.group)).darker();} );
           tooltip.hideTooltip();
         }
 
-        //collects display_all and display_year in an object and returns that object, initializing D3
         var my_mod = {};
-        my_mod.init = function (_data) { //what is _data? .init is initializing 
+        my_mod.init = function (_data) {
           custom_chart(_data);
           start();
           //console.log(my_mod);
@@ -285,7 +275,7 @@
         };
        
         return my_mod;
-      })(d3, CustomTooltip); //pass d3 and customToolTip
+      })(d3, CustomTooltip); // END: pass d3 and customToolTip
 
       //*********CUSTOM TOOLTIP******** 
       function CustomTooltip(tooltipId, width){
@@ -338,7 +328,6 @@
       };
       }
 
-      //part of tooltip, adding commas
       function addCommas(nStr)
       {
       nStr += '';
