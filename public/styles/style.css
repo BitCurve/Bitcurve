@@ -353,9 +353,49 @@ p {
 	margin-bottom: 25px !important;
 }
 
+.footHead {
+	font-size: 16px;
+	letter-spacing: 3px;
+	opacity: 0.4;
+}
+
+.footLinks {
+	display: inline-block;
+	font-family: 'Helvetica Neue';
+	font-weight: 100;
+	letter-spacing: 2px;
+	font-variant: normal;
+	opacity: 1;
+	line-height: 40px;
+	width: 100%;
+}
+
+.footEmail {
+	font-size: 12px;
+	opacity: 0.75;
+}
+
+.smallGuy {
+	height: 40px;
+}
+
+.smallCaps {
+	font-variant: small-caps;
+	font-size: 25px;
+}
+
+.footUl {
+	text-align: left;
+	float: left;
+	width: 40%;
+}
+
+.footUl-right {
+	text-align: right;
+}
+
 .footerContent {
 	padding: 0 20px 30px;
-	opacity: 0.4;
 }
 
 .d3Home {
