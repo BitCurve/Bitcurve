@@ -403,10 +403,10 @@ p {
 	height: 500px;
 }
 
-
+/*SIDEBAR*/
+/*idebar for ArtDashboard*/
 #wrapper {
   padding-left: 250px;
-  transition: all 0.4s ease 0s;
 }
 
 #sidebar-wrapper {
@@ -418,11 +418,10 @@ p {
   height: 100%;
   overflow-y: auto;
   z-index: 1000;
-  transition: all 0.4s ease 0s;
 }
 
 #page-content-wrapper {
-  width: 100%;
+  width: calc(100% -250px);
 }
 
 .sidebar-nav {
@@ -456,13 +455,44 @@ p {
     }
 
 }
+<<<<<<< HEAD
+
+/*//DASHBOARD CONTENT*/
+.description {
+	text-align: center;
+}
+
+.feeContainer {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 200px;
+=======
 .axis path,
 .axis line {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
+>>>>>>> 7a1c372c68a07d75b416670e4f28eba2789ba965
 }
 
-.area {
-  fill: steelblue;
+.fee-low{
+	background-color: #CC8421
+	
+}
+
+.fee-median {
+	background-color: #FFBFE9
+}
+
+.fee-high{
+	background-color: #62AFB2
+}
+
+
+.fee {
+	text-align: center;
+	padding: 14px;
+	width: 0 auto;
+	font-weight: bold;
 }
