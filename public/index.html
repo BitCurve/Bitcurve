@@ -24,13 +24,13 @@
 <div class="navbar">
 	<a href="/#/"><img class="miniLogo" src="images/bitcurve-logo-mini.png"></a>
 	<div class="centered-navLinks">
-		<a href="/#/whatIsBitcoin"><p class="inline">about</p></a>
-		<a ng-hide="loggedIn" href="/#/register"><p class="inline">register</p></a>
-		<a ng-show="loggedIn" href="/#/art-dashboard"><p class="inline">dashboard</p></a>
+		<a ui-sref= "whatIsBitcoin"><p class="inline">about</p></a>
+		<a ng-hide="loggedIn" ui-sref="register"><p class="inline">register</p></a>
+		<a ng-show="loggedIn" ui-sref="art-dashboard"><p class ="inline">dashboard</p></a>
 	</div>
 	<ul class="navLinks">
-		<a ng-hide="loggedIn" href="/#/login"><img class="login-cloud loginLink" src="images/cloud-log-in.png"></a>
-		<a ng-show="loggedIn" ng-click="logout(); isLoggedIn()"href="/#/home"><img class="login-cloud loginLink" src="images/cloud-log-out.png"></a>
+		<a ng-hide="loggedIn" ui-sref="login"><img class="login-cloud loginLink" src="images/cloud-log-in.png"></a>
+		<a ng-show="loggedIn" ng-click="logout(); isLoggedIn()" ui-sref="home"><img class="login-cloud loginLink" src="images/cloud-log-out.png"></a>
 	</ul>
 </div>
 

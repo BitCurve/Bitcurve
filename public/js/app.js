@@ -16,12 +16,6 @@ app.config(function($stateProvider, $urlRouterProvider){
     templateUrl: "./templates/homeTmpl.html",
     controller: "homeCtrl"
   })
-  // ABOUT BITCURVE
-  .state('about', {
-    url: "/about",
-    templateUrl: "./templates/aboutTmpl.html",
-    controller: "aboutCtrl"
-  })
   // WHAT IS BITCOIN
   .state('whatIsBitcoin', {
     url: "/whatIsBitcoin",
@@ -34,21 +28,6 @@ app.config(function($stateProvider, $urlRouterProvider){
     templateUrl: "./templates/artDashboardTmpl.html",
     controller: "artDashboardCtrl"
   })
-
-
-  .state('artDashboard.price', {
-    url: "/price",
-    templateUrl: "./templates/price.html",
-    controller: "artDashboardCtrl",
-    parent: 'artDashboard'
-  })
-  .state('artDashboard.dif', {
-    url: "/dif",
-    templateUrl: "./templates/dif.html",
-    controller: "artDashboardCtrl",
-    parent: 'artDashboard'
-  })
-
     // ART DASHBOARD CHILDREN
     .state('artDashboard.miners', {
       url: "/miners",
@@ -80,12 +59,6 @@ app.config(function($stateProvider, $urlRouterProvider){
       controller: "artDashboardCtrl",
       parent: 'artDashboard'
     })
-  // ANALYTICS DASHBOARD
-  .state('analyticsDashboard', {
-    url: "/analyticsDashboard",
-    templateUrl: "./WhatIsBitcurve/whatIsBitcoin.html",
-    controller: "analyticsDashboardCtrl"
-  })
     //LOGIN
     .state('login', {
       url: "/login",
