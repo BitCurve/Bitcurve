@@ -1,18 +1,18 @@
 (function() {
 
-	angular.module('circulation.directives', [])
+  angular.module('circulation.directives', [])
 
-	.directive('circulationData', [function ($location){  
-		return {
-			scope: {
-				selectedData: '='
-			}, 
-			restrict: "A",
-			link: function(scope, element, attrs) {
+  .directive('circulationData', [function ($location){  
+    return {
+      scope: {
+        selectedData: '='
+      }, 
+      restrict: "A",
+      link: function(scope, element, attrs) {
 
         scope.$watch('selectedData', function(){
           var data = scope.selectedData;
-        });	// end scope.$watch
+        }); // end scope.$watch
 
         // *********** BEGIN D3 ***********
         var custom_bubble_chart = (function(d3, CustomTooltip) {
@@ -106,7 +106,7 @@
                 x: Math.random() * 900, 
                 y: Math.random() * 800
               };
-              nodes.push(node); 	
+              nodes.push(node);   
             });
 
             nodes.sort(function(a, b) {return b.value - a.value; }); 
