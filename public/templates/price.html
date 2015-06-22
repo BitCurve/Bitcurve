@@ -1,9 +1,18 @@
- <div id="main" role="main">
- 	<h2 class="metric-heading">Bitcoin Daily Price</h2>	
-     <div id="view_selection" class="btn-group">
-       <a href="#" id="priceAll" class="btn active">All</a>
-       <a href="#" id="priceYear" class="btn">Prices by Year</a>
-   <div id="priceVis"></div>
-   <div price-data selected-data="selectedData"></div>
+<div id="main" role="main">
+	<h2 class="metric-heading">Bitcoin Daily Price</h2>
+	 <h3 class="description">A chart showing the USD market price from the major exchanges</h3><br>
 
-</div> 
+	   <div class="feeContainer">
+		   	<span class="fee price-low">low</span>
+	       	<span class="fee price-median">medium</span>
+	       	<span class="fee price-high">high</span>
+       </div><br>
+
+    <div id="view_selection" class="btn-group">
+		<a href="#" id="priceAll" class="btn active">All</a>
+       	<a href="#" id="priceYear" class="btn">Price by Year</a>
+	   <div id="priceVis"></div>
+	   <div price-data selected-data="selectedData"></div>
+   </div>
+
+</div>
