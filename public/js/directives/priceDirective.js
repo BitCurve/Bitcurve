@@ -51,21 +51,6 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
       "2014": {x: (width / 8) * 6, y: height / 2},
       "2015": {x: (width / 8) * 7, y: height / 2}
     };
-
-  var month_centers = {
-    "1": {x: width / 13, y: height / 2},
-    "2": {x: (width / 13) * 2, y: height / 2},
-    "3": {x: (width / 13) * 3, y: height / 2},
-    "4": {x: (width / 13) * 4, y: height / 2},
-    "5": {x: (width / 13) * 5, y: height / 2},
-    "6": {x: (width / 13) * 6, y: height / 2},
-    "7": {x: (width / 13) * 7, y: height / 2},
-    "8": {x: (width / 13) * 8, y: height / 2},
-    "9": {x: (width / 13) * 9, y: height / 2},
-    "10": {x: (width / 13) * 10, y: height / 2},
-    "11": {x: (width / 13) * 11, y: height / 2},
-    "12": {x: (width / 13) * 12, y: height / 2}
-  };
  
  //color definition 
   var fill_color = d3.scale.ordinal()
@@ -75,7 +60,7 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
  
  //custom chart that takes in data 
  var custom_chart = function(data) {
-  console.log("data", data);
+  // console.log("data", data);
     //use the max total_amount in the data as the max in the scale's domain
     max_price = d3.max(data, function(d) { return parseFloat(d.price, 10); }); //function for the max data and parsing it into #
     // console.log("max_price", max_price);
@@ -100,7 +85,7 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
   };
   groupLevel();
 
-      console.log("data", data);
+      // console.log("data", data);
     //create node objects from original data that will serve as the data behind each bubble in the vis, then add each node to nodes to be used later
     data.forEach(function(d){//The forEach() method executes a provided function once per array element.
 
@@ -173,16 +158,7 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
  
   };
  
-//charge strength to the specified value. // refers to how nodes in the environment push away from one another or attract one another. Kind of like magnets, nodes have a charge that can be positive (attraction force) or negative (repelling force). 
-//The charge of a force layout specifies node-node repulsions, so it could be used to push nodes away from one another, creating this effect. But how can this work with different sizes if charge is just a single parameter?
-
-//The trick is that along with a static value, charge can also take a function, which is evaluated for each node in the layout, passing in that node’s data. Here is the charge function for this visualization: math.pow
-
-//Charge function that is called for each node.
-//Charge is proportional to the diameter of the  circle (which is stored in the radius attribute of the circle's associated data.
-//This is done to allow for accurate collision detection with nodes of different sizes.
-//Charge is negative because we want nodes to repel.
-//Dividing by 8 scales down the charge to be appropriate for the visualization dimensions.
+//charge strength to the specified value. 
   function charge(d) { 
     return -Math.pow(d.radius, 2.0) / 8; //
   }
@@ -201,10 +177,6 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     force.gravity(layout_gravity) //force is an instance variable of BubbleChart holding the force layout for the visualization.
          .charge(charge)
          .friction(0.9)
-         //The original graphic has some nice transitions between views of the data, where bubbles are pulled apart into separate groups. I’ve replicated this somewhat by having a view that divides up Gate’s grants by year.
-        //How is this done? Well, lets start with the all-together view first. The position of each node is determined by the function called for each tick of the simulation. This function gets passed in the tick event, which includes the alpha for this iteration of the simulation.
-
-        //So what this code does is for every tick event, for each circle in @circles, the move_towards_center method is called, with the current alpha value passed in. Then, The cx and cy of each circle is set based on it’s data’s x and y values.
          .on("tick", function(e) {
             circles.each(move_towards_center(e.alpha)) //The circles instance variable holds the svg circles that represent each node.
                    .attr("cx", function(d) {return d.x;})
@@ -213,12 +185,6 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     force.start();
     hide_years();
   }
- 
-  //moving the data to the center, alpha starts at 0.1. After a few hundred ticks, alpha is decreased some amount. This continues until alpha is really small (for example 0.005), and then the simulation ends. What this means is that alpha can be used to scale the movement of nodes in the simulation. So at the start, nodes will move relatively quickly. When the simulation is almost over, the nodes will just barely be tweaking their positions
-
-  //So, move_towards_center must be doing something with the data’s x and y values to get things to move.
-
-  //So move_towards_center returns a function that is called for each circle, passing in its data. Inside this function, the x and y values of the data are pushed towards the @center point (which is set to the center of the visualization). This push towards the center is dampened by a constant, 0.02 + @damper and alpha.
 
   //The alpha dampening allows the push towards the center to be reduced over the course of the simulation, giving other forces like gravity and charge the opportunity to push back. Moves all circles towards the @center of the visualization
   function move_towards_center(alpha) { 
@@ -228,10 +194,7 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     };
   }
 
- //II. grouping all the data by year; Ok, we’ve now seen how the nodes in the simulation move towards one point, what about multiple locations? The code is just about the same:
-
- //The switch to displaying by year is done by restarting the force simulation. This time the tick function calls move_towards_year. Otherwise it’s about the same as display_group_all.
- //sets the display of bubbles to be separated into each year. Does this by calling move_towards_year
+ //II. grouping all the data by year
   function displayPriceByYear() {
     force.gravity(layout_gravity) 
          .charge(charge)
@@ -243,7 +206,6 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
         });
     force.start();
     display_years();
-    hide_months();
   }
  
   //moving the data to its respective year; move_towards_year is almost the same as move_towards_center. The difference being that first the correct year point is extracted from @year_centers. Here’s what that variable looks like:
@@ -255,7 +217,6 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     };
   }
 
- 
   //Method to display year titles, setting up area for split years; this is just an associative array where each year has its own location to move towards.
   function display_years() {
       // var years_x = {"2013": 160, "2014": width / 2, "2015": width - 160};
@@ -277,56 +238,8 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
   function hide_years() {
       var years = vis.selectAll(".years").remove();
   }
-
- // // III. grouping all the data by CIRCULATION (by year)
- //  function displayCirculationByMonth() {
- //    force.gravity(layout_gravity)
- //         .charge(charge)
- //         .friction(0.9)
- //        .on("tick", function(e) {
- //          // console.log("e", e);
- //          circles.each(moveCirculationTowardsMonth(e.alpha))
- //                 .attr("cx", function(d) { return d.x;})
- //                 .attr("cy", function(d) { return d.y;});
- //        });
- //    force.start();
- //    display_months();
- //    hide_years();
- //  }
- 
- //  // moving the CIRCULATION data to its respective year
- //  function moveCirculationTowardsMonth(alpha) {
- //    return function(d) {
- //      // console.log("d", d);
- //      var target = month_centers[d.month];
- //      // console.log("target", target);
- //      d.x = d.x + (target.x - d.x) * (damper + 0.02) * alpha * 1.1;
- //      d.y = d.y + (target.y - d.y) * (damper + 0.02) * alpha * 1.1;
- //    };
- //  }
- 
- //  function display_months() {
- //      var months_x = {"1": width / 13, "2": (width / 13) * 2, "3": (width / 13) * 3, "4": (width / 13) * 4, "5": (width / 13) * 5, "6": (width / 13) * 6, "7": (width / 13) * 7, "8": (width / 13) * 8, "9": (width / 13) * 9, "10": (width / 13) * 10, "11": (width / 13) * 11, "12": (width / 13) * 12};
- //      var months_data = d3.keys(months_x);
- //      var months = vis.selectAll(".months")
- //                 .data(months_data);
- 
- //      months.enter().append("text")
- //                   .attr("class", "months")
- //                   .attr("x", function(d) { return months_x[d]; }  )
- //                   .attr("y", 40)
- //                   .attr("text-anchor", "middle")
- //                   .text(function(d) { return d;});
- 
- //  }
- //  function hide_months() {
- //      var months = vis.selectAll(".months").remove();
- //  }
-
-
  
  //tooltip to show data details for each element
- //this cannot be moved to 
   function show_details(data, i, element) {
     d3.select(element).attr("stroke", "#fff");
     var content = "<span class=\"name\">Price:</span><span class=\"value\"> $ " + addCommas(data.price) + "</span><br/>";
@@ -390,7 +303,7 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
 //*********CUSTOM TOOLTIP******** 
 function CustomTooltip(tooltipId, width){
   var tooltipId = tooltipId;
-  $("body").append("<div class='tooltip' id='"+tooltipId+"'></div>");
+  $("#priceVis").append("<div class='tooltip' id='"+tooltipId+"'></div>");
   
   if(width){
     $("#"+tooltipId).css("w-th", width);
@@ -454,22 +367,10 @@ function addCommas(nStr)
 
 //*********DATA*********
 var bitcurveData = d3.json("../../data/artDashboardData.json", function(data) {
-  console.log("listening to data", data);
+  // console.log("listening to data", data);
   custom_bubble_chart.init(data);
   custom_bubble_chart.toggle_view('all');
 });
-
-
-
-// function update(data){
-//   // console.log("data", JSON.stringify(data))
-// // }
-// // d3.json(bitcurveData, function(data) {
-//   console.log("data", data);
-//     custom_bubble_chart.init(data);
-//     custom_bubble_chart.toggle_view('all');
-// };
-// update(bitcurveData);
 
 //jQuery 
 $(document).ready(function() {
@@ -482,11 +383,9 @@ $(document).ready(function() {
   });
 });
 
-
-
       } // end link
 
-    } // end return
+    }; // end return
 
   }]);  // end .directive
 

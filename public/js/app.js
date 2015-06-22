@@ -24,7 +24,7 @@ app.config(function($stateProvider, $urlRouterProvider){
   })
   // WHAT IS BITCOIN
   .state('whatIsBitcoin', {
-    url: "/whatisbitcoin",
+    url: "/whatIsBitcoin",
     templateUrl: "./templates/whatIsBitcoin.html",
     controller: "whatIsBitcoinCtrl"
   })
@@ -101,21 +101,21 @@ app.config(function($stateProvider, $urlRouterProvider){
   // ANALYTICS DASHBOARD
   .state('analyticsDashboard', {
     url: "/analyticsDashboard",
-    templateUrl: "./WhatIsBitCurve/whatIsBitcoin.html",
+    templateUrl: "./WhatIsBitcurve/whatIsBitcoin.html",
     controller: "analyticsDashboardCtrl"
   })
-  // LOGIN
-  .state('login', {
-    url: "/login",
-    templateUrl: "./templates/loginTmpl.html",
-    controller: "loginCtrl"
-  })
-  // REGISTER
-  .state('createAccount', {
-    url: "/register",
-    templateUrl: "./templates/createAccountTmpl.html",
-    controller: "createAccountCtrl"
-  })
+    //LOGIN
+    .state('login', {
+      url: "/login",
+      templateUrl: "../templates/loginTmpl.html",
+      controller: "loginCtrl"
+    })
+    //REGISTER
+    .state('register', {
+      url: "/register",
+      templateUrl: "../templates/createAccountTmpl.html",
+      controller: "createAccountCtrl"
+    })
 
 
 }); // End app.config
