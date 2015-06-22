@@ -51,21 +51,6 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
       "2014": {x: (width / 8) * 6, y: height / 2},
       "2015": {x: (width / 8) * 7, y: height / 2}
     };
-
-  var month_centers = {
-    "1": {x: width / 13, y: height / 2},
-    "2": {x: (width / 13) * 2, y: height / 2},
-    "3": {x: (width / 13) * 3, y: height / 2},
-    "4": {x: (width / 13) * 4, y: height / 2},
-    "5": {x: (width / 13) * 5, y: height / 2},
-    "6": {x: (width / 13) * 6, y: height / 2},
-    "7": {x: (width / 13) * 7, y: height / 2},
-    "8": {x: (width / 13) * 8, y: height / 2},
-    "9": {x: (width / 13) * 9, y: height / 2},
-    "10": {x: (width / 13) * 10, y: height / 2},
-    "11": {x: (width / 13) * 11, y: height / 2},
-    "12": {x: (width / 13) * 12, y: height / 2}
-  };
  
  //color definition 
   var fill_color = d3.scale.ordinal()

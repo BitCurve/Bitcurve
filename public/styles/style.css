@@ -415,6 +415,7 @@ p {
     }
 
 }
+<<<<<<< HEAD
 
 /*//DASHBOARD CONTENT*/
 .description {
@@ -426,6 +427,13 @@ p {
 	margin-left: auto;
 	margin-right: auto;
 	width: 200px;
+=======
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+>>>>>>> 7a1c372c68a07d75b416670e4f28eba2789ba965
 }
 
 .fee-low{
