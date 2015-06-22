@@ -1,9 +1,7 @@
 var app = angular.module('bitcurve');
 
 
-app.controller('loginCtrl', function($scope, $http, $window, $rootScope, $location, ngToast){
-	$scope.loggedIn = !!$window.sessionStorage.token;
-	$scope.logout = function(){
+app.controller('loginCtrl', function($scope, $http, $window, $rootScope, $location, ngToast){	$scope.logout = function(){
 		delete $window.sessionStorage.token;
 		$scope.loggedIn = false;
 	};
@@ -17,6 +15,7 @@ app.controller('loginCtrl', function($scope, $http, $window, $rootScope, $locati
 			}
 		}).success(function(data, status, headers, config){
 			$window.sessionStorage.token = data.token;
+        	console.log(data.token);
         	$scope.loggedIn = true;
         	$location.path('/art-dashboard');
         	ngToast.create({

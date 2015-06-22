@@ -11,7 +11,7 @@ app.controller('createAccountCtrl', function($scope, $http, $location, $window, 
 				password: $scope.register.password,
 			}
 		}).success(function(data){
-			$location.path('/#/login')
+			$location.path('/login')
 			$window.sessionStorage.token = data.token;
 			ngToast.create({
 				className: 'success',

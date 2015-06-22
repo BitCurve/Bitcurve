@@ -18,17 +18,19 @@
     </style>
 </head>
 
-<body>
+<body ng-controller="mainCtrl">
 
 <!-- NAVBAR -->
 <div class="navbar">
 	<a href="/#/"><img class="miniLogo" src="images/bitcurve-logo-mini.png"></a>
 	<div class="centered-navLinks">
 		<a href="/#/whatIsBitcoin"><p class="inline">about</p></a>
-		<a href="/#/register"><p class="inline">register</p></a>
+		<a ng-hide="loggedIn" href="/#/register"><p class="inline">register</p></a>
+		<a ng-show="loggedIn" href="/#/art-dashboard"><p class="inline">dashboard</p></a>
 	</div>
 	<ul class="navLinks">
-		<a href="/#/login"><img class="login-cloud loginLink" src="images/cloud-log-in.png"></a>
+		<a ng-hide="loggedIn" href="/#/login"><img class="login-cloud loginLink" src="images/cloud-log-in.png"></a>
+		<a ng-show="loggedIn" ng-click="logout(); isLoggedIn()"href="/#/home"><img class="login-cloud loginLink" src="images/cloud-log-out.png"></a>
 	</ul>
 </div>
 
@@ -62,6 +64,7 @@
 	<script type="text/javascript" src="./js/controllers/whatIsBitcoinCtrl.js"></script>
 	<script type="text/javascript" src="./js/controllers/loginCtrl.js"></script>
 	<script type="text/javascript" src="./js/controllers/createAccountCtrl.js"></script>
+	<script type="text/javascript" src="./js/controllers/mainCtrl.js"></script>
 	<!-- SERVICES -->
 	<script type="text/javascript" src="./js/services/artDashboardService.js"></script>
 	<script type="text/javascript" src="./js/services/dashboard.js"></script>
