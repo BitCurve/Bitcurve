@@ -4,7 +4,7 @@ app.run(function($state, $rootScope){
   $rootScope.$state = $state;
 });
 
-app.config(function($stateProvider, $urlRouterProvider){
+app.config(function($stateProvider, $urlRouterProvider, $httpProvider){
 	$urlRouterProvider
   .otherwise("/");
 

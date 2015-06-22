@@ -1,7 +1,8 @@
 var app = angular.module('bitcurve');
 
 
-app.controller('loginCtrl', function($scope, $http, $window, $rootScope, $location, ngToast){	$scope.logout = function(){
+app.controller('loginCtrl', function($scope, $http, $window, $rootScope, $location, ngToast){	
+		$scope.logout = function(){
 		delete $window.sessionStorage.token;
 		$scope.loggedIn = false;
 	};
