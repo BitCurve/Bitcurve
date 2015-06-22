@@ -67,6 +67,7 @@ p {
 
 .metric-heading {
 	text-align: center;
+	font-size: 60px;
 }
 
 
@@ -408,14 +409,23 @@ div#main.ng-scope {
 
 /*SIDEBAR*/
 
+#wrapper, #main {
+	font-family: "Circular Bold";
+}
+
 #sidebar-wrapper {
   width: 250px;
-  background: #c5ccca;
+  background: #4795d1;
   position: fixed;
   height: 100%;
   z-index: 1000;
   float: left;
 }
+
+.sidebar-heading {
+	color: #fff;
+}
+
 
 #page-content-wrapper {
   width: calc(100% - 250px);
@@ -458,6 +468,8 @@ div#main {
 /*//DASHBOARD CONTENT*/
 .description {
 	text-align: center;
+	font-size: 18px;
+	padding-top: 15px;
 }
 h3.description {
 	width: 900px;
