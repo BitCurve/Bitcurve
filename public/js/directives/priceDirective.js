@@ -60,7 +60,7 @@
             // console.log("min_price", min_price);
             radius_scale = d3.scale.pow().exponent(0.5) //pow.exponent takes in an exponent value
               .domain([0, max_price])
-              .range([2, 12]);
+              .range([2, 8]);
 
             var groupLevel = function(){
               // console.log("the low is 0");

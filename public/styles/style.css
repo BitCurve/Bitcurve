@@ -268,13 +268,14 @@ div#main.ng-scope {
 .explanationContainer {
 	width: 100%;
 	height: 100%;
-	color: #323131;
+	color: #000;
 	line-height: normal;
+	background-color: #f3a734;
 }
 
 .explanationHeader {
 	font-size: 50px;
-	margin-top: 50px;
+	padding-top: 225px;
 	text-align: center;
 }
 
@@ -283,7 +284,7 @@ div#main.ng-scope {
 	margin-right: 100px;
 	font-size: 24px;
 	margin-top: 25px;
-	margin-bottom: 50px !important;
+	margin-bottom: 225px !important;
 }
 
 /* LOGIN/REGISTER */
@@ -453,6 +454,7 @@ div#main {
     }
 
 }
+
 /*//DASHBOARD CONTENT*/
 .description {
 	text-align: center;
@@ -462,10 +464,16 @@ h3.description {
 	margin: 0 auto;
 }
 
+h3.description {
+    width: 900px;
+    margin: 0 auto;
+}
+
 .feeContainer {
 	display: block;
 	text-align: center;
 }
+
 .axis path,
 .axis line {
   fill: none;
