@@ -560,3 +560,8 @@ h3.description {
 	width: 0 auto;
 	font-weight: bold;
 }
+
+/*ABOUT*/
+.about-heading {
+	color: #f2a635;
+}
