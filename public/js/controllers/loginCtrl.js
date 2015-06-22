@@ -1,10 +1,7 @@
 var app = angular.module('bitcurve');
 
 
-app.controller('loginCtrl', function($scope, $http, $window, $rootScope, $location){
-	$scope.loggedIn = !!$window.sessionStorage.token;
-	$scope.message = '';
-	$scope.logout = function(){
+app.controller('loginCtrl', function($scope, $http, $window, $rootScope, $location, ngToast){	$scope.logout = function(){
 		delete $window.sessionStorage.token;
 		$scope.loggedIn = false;
 	};
@@ -18,12 +15,21 @@ app.controller('loginCtrl', function($scope, $http, $window, $rootScope, $locati
 			}
 		}).success(function(data, status, headers, config){
 			$window.sessionStorage.token = data.token;
+        	console.log(data.token);
         	$scope.loggedIn = true;
-        	$location.path('/art-dashboard')
+        	$location.path('/art-dashboard');
+        	ngToast.create({
+  				className: 'success',
+  				content: '<strong>Success! </strong>You are now logged in.'
+			});
 		}).error(function(data, status, headers, config){
 			$scope.message = "Error: Invalid username or password";
 			delete $window.sessionStorage.token;
 			$scope.loggedIn = false;
+			ngToast.create({
+  				className: 'danger',
+  				content: '<strong>Error! </strong>Invalid username or password.'
+			});
 		})
 	};
 });

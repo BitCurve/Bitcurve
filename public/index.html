@@ -5,6 +5,8 @@
 	<link rel="stylesheet" type="text/css" href="./styles/bootstrap.min.css"> <!-- For dashboard page -->
     <link rel="stylesheet" type="text/css" href="./styles/dc.css"/> <!-- For dashboard page -->
 	<link rel="stylesheet" type="text/css" href="./styles/style.css" />
+	<link rel="stylesheet" type="text/css" href="./styles/ngToast.css" />
+	<link rel="stylesheet" type="text/css" href="./styles/ngToast-animations.css" />
 	<style> /* For dashboard page */ 
         #monthly-volume-chart g.y {
             display: none;
@@ -16,7 +18,7 @@
     </style>
 </head>
 
-<body>
+<body ng-controller="mainCtrl">
 
 <!-- NAVBAR -->
 <div class="navbar">
@@ -24,9 +26,12 @@
 	<div class="centered-navLinks">
 		<a ui-sref= "whatIsBitcoin"><p class="inline">about</p></a>
 		<a ui-sref="register"><p class="inline">register</p></a>
+		<a ng-hide="loggedIn" ui-sref="register"><p class="inline">register</p></a>
+		<a ng-show="loggedIn" ui-sref="art-dashboard"><p class ="inline">dashboard</p></a>
 	</div>
 	<ul class="navLinks">
-		<a ui-sref="login"><img class="login-cloud loginLink" src="images/cloud-log-in.png"></a>
+		<a ng-hide="loggedIn" ui-sref="login"><img class="login-cloud loginLink" src="images/cloud-log-in.png"></a>
+		<a ng-show="loggedIn" ng-click="logout(); isLoggedIn()" ui-sref="home"><img class="login-cloud loginLink" src="images/cloud-log-out.png"></a>
 	</ul>
 </div>
 
@@ -42,6 +47,8 @@
 	<script type="text/javascript" src="./js/libs/crossfilter.js"></script>
 	<script type="text/javascript" src="./js/libs/colorbrewer.js"></script>
 	<script type="text/javascript" src="./js/libs/dc.js"></script>
+	<script type="text/javascript" src="./js/libs/ngToast.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-sanitize.js"></script>
 	<!-- APP.JS -->
 	<script type="text/javascript" src="./js/app.js"></script>
 
@@ -58,6 +65,7 @@
 	<script type="text/javascript" src="./js/controllers/whatIsBitcoinCtrl.js"></script>
 	<script type="text/javascript" src="./js/controllers/loginCtrl.js"></script>
 	<script type="text/javascript" src="./js/controllers/createAccountCtrl.js"></script>
+	<script type="text/javascript" src="./js/controllers/mainCtrl.js"></script>
 	<!-- SERVICES -->
 	<script type="text/javascript" src="./js/services/artDashboardService.js"></script>
 	<script type="text/javascript" src="./js/services/dashboard.js"></script>
