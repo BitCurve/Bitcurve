@@ -216,14 +216,14 @@
           }
 
           var my_mod = {};
-          my_mod.init = function (_data) { //what is _data? .init is initializing 
+          my_mod.init = function (_data) {  
             custom_chart(_data);
             start();
             //console.log(my_mod);
           };
 
-          my_mod.display_all = display_group_all; //display all charts
-          my_mod.display_year = displaycirculationByYear; //display year
+          my_mod.display_all = display_group_all;
+          my_mod.display_year = displaycirculationByYear; 
           my_mod.toggle_view = function(view_type) { 
             if (view_type === 'circulation') {
               displaycirculationByYear();
