@@ -284,7 +284,7 @@
           }
         };
        
-<<<<<<< HEAD
+
         return my_mod;
       })(d3, CustomTooltip); //pass d3 and customToolTip
 
@@ -371,7 +371,6 @@
         });
       });
 
-=======
       //   return my_mod;
       // })(d3, CustomTooltip); //pass d3 and customToolTip
 
@@ -585,7 +584,6 @@ d3.json("../../data/artDashboardData.json", function(error, data) {
       .attr("class", "line")
       .attr("d", line);
 });
->>>>>>> 7a1c372c68a07d75b416670e4f28eba2789ba965
 
       } // end link
 
