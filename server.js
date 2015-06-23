@@ -154,6 +154,11 @@ app.post('/api/login', function(req, res){
 //     });
 // })
 
+//get user endpoint return user object
+// app.get ('getDashboard', apiRoutes, function(req, res){
+
+// })
+
 //Get request for the current exchange rate
 app.get ('/api/getData', function(req, res){
 	ExchangeRate.find(function(err, result){
