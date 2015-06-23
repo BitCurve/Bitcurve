@@ -1,4 +1,4 @@
-var app = angular.module('bitcurve', ['ui.router', 'price.directives', 'dif.directives', 'circulation.directives', 'fees.directives', 'miners.directives', 'ngToast', 'ngSanitize']);
+var app = angular.module('bitcurve', ['ui.router', 'price.directives', 'dif.directives', 'circulation.directives', 'fees.directives', 'miners.directives', 'toaster']);
 
 app.run(function($state, $rootScope){
   $rootScope.$state = $state;
