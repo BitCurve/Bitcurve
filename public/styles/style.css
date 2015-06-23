@@ -307,19 +307,85 @@ div#main.ng-scope {
 
 /* LOGIN/REGISTER */
 .loginRegisterContainer {
-	width: 40vw;
+	width: 500px;
 	min-width: 350px;
-	background-color: #4795D1;
-	color: #FFFFFF;
-	border: 3px solid #F3A734;
-	border-radius: 10px;
+	background-color: #FFF;
+	color: #5a6b77;
+	border-radius: 5px;
 	padding: 1vw;
-	margin: 12vw auto;
+	margin-top: 100px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 	font-family: 'Circular Reg';
 }
 
+.loginRegisterContainerContainer {
+	height: 100%;
+	width: 100%;
+	background: linear-gradient(128deg,#1ab5c2,#0572e0);
+	background-size: cover;
+	background-attachment: fixed;
+	position: absolute;
+}
+
+.fa {
+	padding-left: 10px;
+	color: #4795D1;
+}
+
+.emailShiz, .passwordShiz {
+	border: 1px solid #4795D1;
+	border-radius: 5px;
+	margin-top: 10px;
+	height: 45px;
+	line-height: 50px;
+}
+
 .loginRegisterContainer input {
-	width: 97%;
+	font-size: 16px;
+	width: 87%;
+	border: none !important;
+	--webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+.loginRegisterSubmit {
+	background-color: #f3a734;
+	position: relative;
+	top: 20px;
+	padding: 20px;
+	border-radius: 5px;
+	color: #fff;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+.dontAlready {
+	font-size: 20px;
+	color: #FFF;
+	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	margin-top: 50px;
+}
+
+.already {
+	padding: 20px;
+	border: 1px solid #FFF;
+	border-radius: 5px;
+}
+
+.mini-header {
+	font-size: 16px;
+	line-height: 40px;
+	border-bottom: 1px solid #e2e2e2;
+	padding-bottom: 5px;
+	text-align: center;
+	width: 100% !important;
 }
 
 .registerLink {
@@ -562,6 +628,42 @@ h3.description {
 }
 
 /*ABOUT*/
+.aboutContainer {
+	font-family: 'Circular Bold';
+	color: #FFF;
+}
+
 .about-heading {
-	color: #f2a635;
+	font-size: 100px;
+	line-height: 700px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.about-miniHead {
+	font-size: 75px;
+	text-align: center;
+	line-height: 80px;
+	padding-top: 50px;
+}
+
+.about-content {
+	margin-left: 100px;
+	margin-right: 100px;
+	margin-top: 50px;
+	font-size: 36px;
+	line-height: 40px;
+}
+
+.aboutOrange {
+	width: 100%;
+	height: 700px;
+	background-color: #f3a734;
+	color: #000;
+}
+
+.aboutBlue {
+	width: 100%;
+	height: 700px;
+	background-color: #4795D1;
 }
