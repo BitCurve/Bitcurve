@@ -1,16 +1,21 @@
-<div class="loginRegisterContainer">
-	<h1>Register</h1>
-	<form ng-submit='addUser()'>
-		<div>
-			<label>Email</label>
-			<input type='email' ng-model='register.email' placeholder='Enter email' required>
-		</div>
-		<div>
-			<label>Password</label>
-			<input type='password' id="password1" ng-model='register.password' placeholder='Enter password' minlength=4 maxlength=16 required>
-		</div>
-		<br />
-		<button type='submit' class='btn btn-default'>Submit</button>
-		<a class='registerCancel' href='/#/home'>Cancel</a>
-	</form>
+<div class="loginRegisterContainerContainer">
+	<div class="loginRegisterContainer">
+		<p class="mini-header">Create an account</p>
+		<form ng-submit='addUser()'>
+			<div class="emailShiz">
+				<input type='email' ng-model='register.email' placeholder='Email address' required><i class="fa fa-envelope fa-2x"></i>
+			</div>
+			<div class="passwordShiz">
+				<input type='password' id="password1" ng-model='register.password' placeholder='Password' minlength=4 maxlength=16 required><i class="fa fa-key fa-2x"></i>
+			</div>
+			<a href=""><div type="submit" ng-click="addUser()" class="loginRegisterSubmit">Sign up</div></a>
+		</form>
+	</div>
+	<div class="dontAlready">
+		<a ui-sref="login"><p class="already">I already have a BitCurve account</p></a>
+	</div>
 </div>
+
+<!-- 
+<button type='submit' class='btn btn-default'>Submit</button>
+			<a class='registerCancel' href='/#/home'>Cancel</a> -->

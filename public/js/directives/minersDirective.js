@@ -18,8 +18,8 @@
         var custom_bubble_chart = (function(d3, CustomTooltip) {
         "use strict";
 
-          var width = 1400, 
-              height = 600, 
+          var width = 1000, 
+              height = 350, 
               tooltip = new CustomTooltip("bitcurve_tooltip", 240), 
               layout_gravity = -0.01, 
               damper = 0.1, 
