@@ -86,12 +86,10 @@ p {
 /* FONTS */
 @font-face {
 	font-family: 'Circular Reg';
-	src: url('../fonts/circular/circular.otf') format('opentype');
 }
 
 @font-face {
 	font-family: 'Circular Bold';
-	src: url('../fonts/circular/circularBold.otf') format('opentype');
 }
 
 /* NAVBAR */
