@@ -175,7 +175,7 @@ app.get ('/api/bitcoinJson', function(req, res){
 });
 
 // Connections
-var port = 8081;
+var port = 8082;
 
 var mongoUri = 'mongodb://localhost:27017/bitcurve';
 
